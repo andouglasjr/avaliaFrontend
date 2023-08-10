@@ -5,6 +5,7 @@ import { progressStyles } from "./components/progress";
 import { linkStyles } from "./components/link";
 import { breakpoints } from "./foundations/breakpoints";
 import { globalStyles } from "./styles";
+import { badgeStyles } from "./components/badge";
 
 export default extendTheme({ breakpoints }, // Breakpoints
     globalStyles,
@@ -12,4 +13,5 @@ export default extendTheme({ breakpoints }, // Breakpoints
     linkStyles, // link styles
     progressStyles, // progress styles
     inputStyles, // input styles
+    badgeStyles
 );
