@@ -1,0 +1,6 @@
+import{j as t}from"./jsx-runtime-2ef3df91.js";import{P as p}from"./index-2baff29e.js";import{M as m}from"./Icons-84c30ce7.js";import{b as l}from"./chunk-ZJJGQIVY-971fda8c.js";import{I as c}from"./chunk-6QYXN73V-245d72c2.js";import"./index-e03f90b5.js";import"./_commonjsHelpers-725317a4.js";import"./chunk-2GBDXOMA-532e93b7.js";import"./index-203f1c1d.js";import"./index-64aed617.js";import"./extends-883199d4.js";import"./chunk-UVUR7MCU-c18dd7c8.js";import"./chunk-5PH6ULNP-3c0a6be7.js";import"./index-d844c8a1.js";const e=i=>{const{label:u,variant:d,icon:f,...n}=i;return l("purple.2","white"),t.jsx(c,{...n,variant:"icon",icon:t.jsx(m,{})})};e.propTypes={isDisabled:p.bool};e.defaultProps={isDisabled:!1};e.__docgenInfo={description:"",methods:[],displayName:"CustomIconButton",props:{isDisabled:{defaultValue:{value:"false",computed:!1},type:{name:"bool"},required:!1,description:""}}};const E={title:"Molecules/IconButton",component:e,parameters:{layout:"centered"},tags:["autodocs"]},o={args:{isDisabled:!1}};var s,r,a;o.parameters={...o.parameters,docs:{...(s=o.parameters)==null?void 0:s.docs,source:{originalSource:`{
+  args: {
+    isDisabled: false
+  }
+}`,...(a=(r=o.parameters)==null?void 0:r.docs)==null?void 0:a.source}}};const T=["Default"];export{o as Default,T as __namedExportsOrder,E as default};
+//# sourceMappingURL=IconButton.stories-40bca0cd.js.map
