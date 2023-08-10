@@ -12,7 +12,7 @@ export default {
 }
 
 export const Default = {
-    feedback: 'Redação 0001 alterada com sucesso!',
+    feedback: 'Redação X alterada com sucesso!',
     label: 'Mostrar Toast',
     type: 'success',
     variant: 'primary'
