@@ -1,6 +1,0 @@
-import{j as i}from"./jsx-runtime-2ef3df91.js";import{P as n}from"./index-2baff29e.js";import{I as m}from"./chunk-6CVSDS6C-459a3f21.js";import"./index-e03f90b5.js";import"./_commonjsHelpers-725317a4.js";import"./chunk-XRMX4GAI-74b45d57.js";import"./chunk-ZJJGQIVY-971fda8c.js";import"./index-203f1c1d.js";import"./extends-883199d4.js";import"./index-d844c8a1.js";const s=a=>{const{variant:l,icon:u,...p}=a;return i.jsx(m,{...p,onInvalid:"true",variant:"input_primary",fontSize:"sm",ms:{base:"0px",md:"0px"},mb:"24px",size:"lg"})};s.propTypes={isDisabled:n.bool};s.defaultProps={isDisabled:!1};s.__docgenInfo={description:"",methods:[],displayName:"CustomInput",props:{isDisabled:{defaultValue:{value:"false",computed:!1},type:{name:"bool"},required:!1,description:""}}};const v={title:"Molecules/Input",component:s,parameters:{layout:"centered"},tags:["autodocs"]},e={args:{isDisabled:!1}};var t,o,r;e.parameters={...e.parameters,docs:{...(t=e.parameters)==null?void 0:t.docs,source:{originalSource:`{
-  args: {
-    isDisabled: false
-  }
-}`,...(r=(o=e.parameters)==null?void 0:o.docs)==null?void 0:r.source}}};const j=["Default"];export{e as Default,j as __namedExportsOrder,v as default};
-//# sourceMappingURL=Input.stories-01f2c64d.js.map
