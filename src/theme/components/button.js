@@ -43,7 +43,7 @@ export const buttonStyles = {
 
                 }),
                 secondary: (props) => ({
-                    bg: mode("", "")(props),
+                    //bg: mode("", "")(props),
                     color: "purple.2",
                     fontSize: "14px",
                     minW: "113px",

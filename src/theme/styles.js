@@ -1,5 +1,4 @@
 import { mode } from "@chakra-ui/theme-tools";
-
 export const globalStyles = {
     colors: {
         purple: {
@@ -81,18 +80,19 @@ export const globalStyles = {
         Subtitle: {
             fontFamily: 'Manrope',
             fontWeight: 'normal',
-            fontSize: '16px',
-            lineHeight: '28px',
+            fontSize: '20px',
+            lineHeight: '32px',
             marginBottom: '12px',
         },
         Subtitle1: {
             fontFamily: 'Manrope',
             fontWeight: 'semibold',
-            fontSize: '16px',
+            fontSize: '20px',
             lineHeight: '28px',
             marginBottom: '12px',
         },
         Body: {
+            fontFamily: 'Inter',
             fontWeight: 'regular',
             fontSize: '16px',
             lineHeight: '28px',
@@ -131,7 +131,7 @@ export const globalStyles = {
         global: (props) => ({
             body: {
                 overflowX: "hidden",
-                bg: mode("secondaryGray.500", "navy.900")(props),
+                bg: mode("secondaryGray.300", "navy.900")(props),
                 fontFamily: "DM Sans",
                 letterSpacing: "-0.5px",
             },

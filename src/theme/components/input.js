@@ -6,7 +6,7 @@ export const inputStyles = {
       baseStyle: (props) => ({
         field:{
           fontWeight: 400,
-          borderRadius: "4px",
+          borderRadius: "8px",
           border: "1px solid",
           bg: mode("transparent", "transparent")(props),
           color: mode("neutralDark.4", "white")(props),
@@ -22,12 +22,10 @@ export const inputStyles = {
             _focus: {borderColor: mode("purple.2", "")(props),},
             _invalid: {borderColor: mode("rred.2", "")(props),},
             "&:valid:not(:focus)": {borderColor: mode("neutralDark.0", "")(props),}
-            //"&:valid:not(:focus)": {function(){console.log("show papai")}}
           },
         }),
         input_invalid: (props) =>({
           field:{
-            //_focus: {borderColor: mode("purple.2", "")(props),},
             borderColor: mode("rred.2","rred.2")(props),
             _placeholder: {color: mode("rred.2","rred.2")(props),}
           }
