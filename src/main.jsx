@@ -6,11 +6,14 @@ import { ChakraProvider } from "@chakra-ui/react"
 
 //const theme = extendTheme({globalStyles})
 import theme from "./theme/theme"
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
 );
