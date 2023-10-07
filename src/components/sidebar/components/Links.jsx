@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import getEssay from "../../essay/getEssay";
 // chakra imports
 import { Box, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
 

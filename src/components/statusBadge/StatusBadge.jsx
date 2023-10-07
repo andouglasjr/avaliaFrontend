@@ -1,9 +1,9 @@
 import { Badge, Text } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
-export const StatusBadge = ({label, variant}) => {
+export const StatusBadge = ({label, variant, margT, margR}) => {
   return (
-    <Badge variant={variant}>
+    <Badge maxH="28px" mt={margT} mr={margR} variant={variant}>
       <Text textTransform={"none"} textStyle={"Caption1"}>
         {label}
       </Text>
@@ -20,4 +20,6 @@ StatusBadge.defaultProps = {
     variant: 'purple',
     label: 'Label'
 }
+
+export default StatusBadge;
   

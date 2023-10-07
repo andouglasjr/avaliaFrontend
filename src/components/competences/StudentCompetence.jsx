@@ -14,6 +14,7 @@ import {
   Image,
 } from "@chakra-ui/react"
 import GPTLogo from "./GPTLogo.svg";
+import StatusBadge from "../statusBadge/StatusBadge";
 import { PlusIcon, LessIcon } from "../icons/Icons";
 
 export default function StudentCompetence() {
@@ -80,20 +81,20 @@ export default function StudentCompetence() {
     let Total = (DL + CF + SP + CA + EP) * 40;
 
   return (
-    <Accordion borderBottomRightRadius="16px" borderBottomLeftRadius="16px" allowToggle minW="416px" maxW="436px" boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.26)">
-    <Flex borderTopRightRadius="16px" borderTopLeftRadius="16px" minH="65px" alignItems="left">
+    <Accordion mr="47px" maxH="125px" borderBottomRightRadius="16px" borderBottomLeftRadius="16px" allowToggle minW="416px" maxW="436px" boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.26)">
+    <Flex borderTopRightRadius="16px" borderTopLeftRadius="16px" bg="neutralLight.0" minH="65px" alignItems="left">
       <Box my="16.5px" pl="24px" textColor="neutralDark.4" textStyle="Subtitle1">Correções</Box>
       <Spacer />
     </Flex>
     <Flex display={nome == null ? "none" : "block"} minH="44px" bg="neutralLight.1" alignItems="left">
         <AccordionItem bg="transparent">
             <h2>
-            <AccordionButton minH="60px" _focus="null">
+            <AccordionButton bg="neutralLight.1" maxH="60px" _focus="null">
                 <Stack direction="row" textColor="neutralDark.4" as="span" flex='1' textAlign='left'>
                     <Image boxSize="20px" alignSelf="center" src={ GPTLogo } alt="GPTLogo" />
                     <Text my="16px" textStyle="Body1">{ nome || null }</Text>
                     <Spacer />
-                    <Text my="16px" textStyle="Caption1">{ Total || null }</Text>
+                    <StatusBadge label={ Total || null } margT="16px" margR="10px" variant="green" textStyle="Caption1" />
                 </Stack>
                 <AccordionIcon color="neutralDark.0" boxSize="24px"/>
             </AccordionButton>
@@ -292,7 +293,7 @@ export default function StudentCompetence() {
                         <AccordionIcon color="neutralDark.0" boxSize="24px"/>
                         </AccordionButton>
                     </h2>
-                    <AccordionPanel pb={4}>
+                    <AccordionPanel pb={4} borderBottomRightRadius="16px" borderBottomLeftRadius="16px">
                         <Stack mx="auto" mb="10px" mt="10px" minH="24px" direction="row" minW="368px">
                             <Text ml="14px" textStyle="Caption1" textColor="neutralDark.4">Nota: {EP}</Text>
                             <Spacer />

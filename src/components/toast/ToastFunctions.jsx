@@ -49,7 +49,7 @@ const Toast = ({ message, type, onClose }) => {
           <Icon color="ggreen.1" boxSize="20px" as={CorretFullCircleIcon} />
         </Flex>
         <Flex h="56px" w="264px">
-          <Text textStyle="Body1" textColor="neutralLight.0">{message}</Text>
+          <Text textStyle="Body1" textAlign="left" textColor="neutralLight.0">{message}</Text>
         </Flex>
       </Flex>
       <Spacer />
