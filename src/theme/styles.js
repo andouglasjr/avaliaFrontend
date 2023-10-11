@@ -93,7 +93,7 @@ export const globalStyles = {
         },
         Body: {
             fontFamily: 'Inter',
-            fontWeight: 'regular',
+            fontWeight: 'normal',
             fontSize: '16px',
             lineHeight: '28px',
         },
