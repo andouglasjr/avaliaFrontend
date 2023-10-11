@@ -67,7 +67,7 @@ export default function Essays() {
             </Flex>
           </Flex>
           <Box position={"relative"}>
-            <Input borderColor={neutralLight2} paddingRight={"30px"} _placeholder={{textStyle: "Body"}} placeholder="Placeholder" width={"680px"} boxShadow={"0px 4px 6px 0px rgba(28, 31, 36, 0.16)"}/>
+            <Input textStyle={"Body"} borderColor={neutralLight2} paddingRight={"30px"} _placeholder={{textStyle: "Body"}} placeholder="Placeholder" width={"680px"} boxShadow={"0px 4px 6px 0px rgba(28, 31, 36, 0.16)"}/>
             <SendIcon _hover={{cursor: "pointer", color: purple, transition: "all .25s"}} position={"absolute"} top={"50%"} right={"10px"} transform={"translateY(-50%)"} color={neutralDark0} width={"24px"} height={"24px"}/>
           </Box>
           
