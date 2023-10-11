@@ -104,11 +104,13 @@ export const globalStyles = {
             lineHeight: '28px',
         },
         Caption: {
+            fontFamily: 'Inter',
             fontWeight: 'normal',
             fontSize: '14px',
             lineHeight: '24px',
         },
         Caption1: {
+            fontFamily: 'Inter',
             fontWeight: 'medium',
             fontSize: '14px',
             lineHeight: '24px',
