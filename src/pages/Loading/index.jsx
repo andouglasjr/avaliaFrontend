@@ -6,7 +6,7 @@ import {
 
 import { GenerationEssayIcon } from "../../components/icons/Icons"
 
-export default function EssayGenerationLoading(){
+function EssayGenerationLoading(){
 
   const neutralLight1 = useColorModeValue("neutralLight.1","neutralLight.1")
   const neutralDark4 = useColorModeValue("neutralDark.4","neutralDark.4")
@@ -46,4 +46,6 @@ export default function EssayGenerationLoading(){
       </Flex>
     </Flex>
   )
-}
+};
+
+export default EssayGenerationLoading;

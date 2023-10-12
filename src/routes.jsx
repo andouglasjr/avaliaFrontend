@@ -6,6 +6,7 @@ import Login from "./pages/auth/login";
 import EvaluationScreen from "./pages/EvaluationScreen";
 import UserMain from "./pages/UserMain"
 import Landing from "./pages/Landing";
+import EssayGenerationLoading from "./pages/Loading"
 
 function RoutesComponents() {
     return(
@@ -14,6 +15,7 @@ function RoutesComponents() {
             <Route path="/login" element={<Login />} />
             <Route path="/evaluationScreen" element={<EvaluationScreen />} />
             <Route path="/userMain" element={<UserMain />} />
+            <Route path="/loading" element={<EssayGenerationLoading />} />
         </Routes>
     )
 }
