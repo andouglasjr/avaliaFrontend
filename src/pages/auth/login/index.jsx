@@ -221,19 +221,22 @@ function Login() {
             flexDirection="column"
             fontFamily="manrope"      
           >
-            <Button
-              fontSize="sm"
-              variant="primary"
-              fontWeight="700"
-              w="100%"
-              h="40px"
-              mb="16px"
-              onClick={() => {
-                setLogin(true);
-              }}
-            >
-              Entrar
-            </Button>
+            <NavLink to="/landing/competences">
+              <Button
+                fontSize="sm"
+                variant="primary"
+                fontWeight="700"
+                w="100%"
+                h="40px"
+                mb="16px"
+                onClick={() => {
+                  setLogin(true);
+                }}
+
+              >
+                Entrar
+              </Button>
+            </NavLink>
 
             <NavLink to="/auth/sign-up">
             <Button

@@ -1,8 +1,7 @@
 // chakra imports
 import { Box, Flex, Stack } from "@chakra-ui/react";
 //   Custom components
-import Links from "components/sidebar/components/Links";
-import SidebarCard from "components/sidebar/components/SidebarCard";
+import Links from "./Links";
 import React from "react";
 
 // FUNCTIONS

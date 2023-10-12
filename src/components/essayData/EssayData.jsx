@@ -10,7 +10,9 @@ export default function EssayData(props) {
         gap={"16px"}
         backgroundColor={"neutralLight.0"}
         border={"1px"}
+        borderRadius={"16px"}
         borderColor={"neutralLight.2"}
+        boxShadow={"0px 4px 6px 0px rgba(28, 31, 36, 0.26)"}
       >
         <Flex
           width={"556px"}
@@ -19,8 +21,8 @@ export default function EssayData(props) {
           padding={"0"}
           gap={"24px"}
         >
-          <Text color={"neutralDark.0"} width={"96px"}>Tema</Text>
-          <Text>{props.tema}</Text>
+          <Text color={"neutralDark.0"} textAlign="left" width={"96px"}>Tema</Text>
+          <Text textStyle="Body" textColor="neutralDark.4">{props.tema}</Text>
         </Flex>
         <Flex
           width={"556px"}
@@ -29,8 +31,8 @@ export default function EssayData(props) {
           padding={"0"}
           gap={"24px"}
         >
-          <Text color={"neutralDark.0"} width={"96px"}>Redatores</Text>
-          <Text>{props.redatores}</Text>
+          <Text color={"neutralDark.0"} textAlign="left" width={"96px"}>Redatores</Text>
+          <Text textStyle="Body" textColor="neutralDark.4">{props.redatores}</Text>
         </Flex>
         <Flex
           width={"556px"}
@@ -39,8 +41,8 @@ export default function EssayData(props) {
           padding={"0"}
           gap={"24px"}
         >
-          <Text color={"neutralDark.0"} width={"96px"}>Nota</Text>
-          <Text>{props.nota}</Text>
+          <Text color={"neutralDark.0"} textAlign="left" width={"96px"}>Nota</Text>
+          <Text textStyle="Body" textColor="neutralDark.4">{props.nota}</Text>
         </Flex>
         <Flex
           width={"556px"}
@@ -49,8 +51,8 @@ export default function EssayData(props) {
           padding={"0"}
           gap={"24px"}
         >
-          <Text color={"neutralDark.0"} width={"96px"}>Anulada</Text>
-          <Text>{props.anulada}</Text>
+          <Text color={"neutralDark.0"} textAlign="left" width={"96px"}>Anulada</Text>
+          <Text textStyle="Body" textColor="neutralDark.4">{props.anulada}</Text>
         </Flex>
       </Flex>
     )

@@ -11,18 +11,19 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
-import Content from "components/sidebar/components/Content";
+import Content from "./components/Content";
 import {
   renderThumb,
   renderTrack,
   renderView,
-} from "components/scrollbar/Scrollbar";
+} from "../scrollbar/Scrollbar";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import PropTypes from "prop-types";
 import { IoMenuOutline } from "react-icons/io5";
 
 function Sidebar(props) {
-  const { routes } = props;
+  const names = "Tema 1";
+  const { routes } = names;
 
   let variantChange = "0.2s linear";
   let shadow = useColorModeValue(
