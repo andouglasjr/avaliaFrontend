@@ -1,12 +1,11 @@
 import { Fragment } from "react";
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
+import EssayGenerationLoading from "./pages/Loading/essayGenerationLoading";
 
 function App() {
   return (
     <Fragment>
       <globalStyles />
-      <Login></Login>
+      <EssayGenerationLoading/>
     </Fragment>
   );
 }
