@@ -9,12 +9,10 @@ function sidebarButtons(props) {
     const { label, my, extra, mx, mb, mt, icon, w, h, ml, ...rest } = props;
     const [pathFinal, setPathFinal] = useState('-');
     const [buttonIconEdit, setButtonIconEdit] = useState(false);
-    const [buttonNewText, setButtonNewText] = useState(false);
+    const [buttonNewText, setButtonNewText] = useState('A persistência da violência contra a mulher na sociedade brasileira');
+    const [buttonText, setButtonText] = useState('A persistência da violência contra a mulher na sociedade brasileira');
 
-    const { originalTitle1 } = "A ciência é a luz que ilumina as trevas da ignorância";
-    const { originalTitle2 } = "A persistência da violência contra a mulher na sociedade brasileira";
-    const { originalTitle3 } = "O estigma associado às doenças mentais na sociedade brasileira";
-    const { originalTitle4 } = "Democratização do acesso ao cinema no Brasil";
+    const [buttonPath, setButtonPath] = useState([]);
 
     const navigate = useNavigate();
 
@@ -29,15 +27,22 @@ function sidebarButtons(props) {
     const handleClickRename = () => {
         setButtonIconEdit(true)
     };
-
+    
     const handleInputChange = (event) => {
         setButtonNewText(event.target.value);
-        console.log(buttonNewText);
     };
+
+    useEffect(() => {
+        console.log(buttonNewText);
+      }, [buttonNewText]);
 
     const handleClickConfirm = () => {
         setButtonIconEdit(false)
-        
+        if(buttonNewText == "") {
+            setButtonText(buttonText)
+        } else {
+            setButtonText(buttonNewText)
+        }
     };
 
     return (
@@ -60,7 +65,7 @@ function sidebarButtons(props) {
                     {buttonIconEdit == true && pathFinal == "/evaluationScreenn" ? (
                         <Input my="auto" isTruncated textColor="neutralDark.4" textStyle="Caption1" ml="10px"></Input>
                     ) : (
-                        <Text my="auto" isTruncated textColor="neutralDark.4" textStyle="Caption1" ml="10px">A ciência é a luz que ilumina as trevas da ignorância</Text>
+                        <Text my="auto" isTruncated textColor="neutralDark.4" textStyle="Caption1" ml="10px"> A ciência é a luz que ilumina as trevas da ignorância </Text>
                     )}
                 </Flex>
                 <Spacer />
@@ -92,7 +97,7 @@ function sidebarButtons(props) {
                     {buttonIconEdit == true && pathFinal == "/evaluationScreen" ? (
                         <Input my="auto" onChange={ handleInputChange } label={ buttonNewText } isTruncated textColor="neutralDark.4" textStyle="Caption1" ml="10px"></Input>
                     ) : (
-                        <Text my="auto" isTruncated textColor="neutralDark.4" textStyle="Caption1" ml="10px">A persistência da violência contra a mulher na sociedade brasileira</Text>                    )}
+                        <Text my="auto" isTruncated textColor="neutralDark.4" textStyle="Caption1" ml="10px">{ buttonText }</Text>                    )}
                 </Flex>
                 <Spacer />
                 <Flex bg="neutralLight.0" _hover={{ bg: "neutralLight.1", }} borderBottomRightRadius="8px" borderTopRightRadius="8px" w="34px" h="40px" mx={mx} mt={mt}>
