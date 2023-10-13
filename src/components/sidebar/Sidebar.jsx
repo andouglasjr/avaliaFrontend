@@ -23,7 +23,7 @@ function Sidebar() {
                 <SidebarButtons mx="auto" />
             </Flex>
             <Flex ml="12px" w="216px" h="1px" bg="neutralLight.1"/>
-            <Flex w="240px" h="calc(100vh - 696px)" bg="transparent">
+            <Flex w="240px" h="calc(100vh - 240px)" bg="transparent">
                 <PerfilInteract label="Romero Brito" mx="auto" my="auto" />
             </Flex>
         </Flex>
