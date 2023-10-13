@@ -21,7 +21,7 @@ import axios from "axios";
 
 import Toast from "../../../components/toast/ToastFunctions";
 import loginValidations from "./validations/loginValidations";
-
+import { BrandIconBlue } from "../../../components/icons/Icons";
 function Login() {
   // Chakra color mode
   const purple3 = useColorModeValue("purple.3", "purple.3")
@@ -90,29 +90,10 @@ function Login() {
         justifyContent="center"
         letterSpacing="1px"
       >
-        <Flex
-          alignItems="center"
-          flexDirection="start"
-          justifyContent="center"
-          marginBottom="-25px"
-        >
-        <Text
-          color="white"
-          fontSize="40px"
-          fontWeight="600"
-        > portal </Text>
-        <Text
-          color="white"
-          fontSize="40px"
-          fontWeight="100"
-        > das </Text>
-        </Flex>
-        <Text
-          color="cyan.200"
-          fontSize="40px"
-          fontWeight="600"
-        > redações </Text>
-
+        <BrandIconBlue
+          w="285px"
+          h="48px"
+        />
       </Flex>
       <Flex
         h="100vh"
