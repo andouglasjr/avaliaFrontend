@@ -9,7 +9,7 @@ function EvaluationScreen() {
   return (
     <div>
       <Sidebar />
-      <Flex ml="240px" h="100vh" w="calc(100vh + 100vh)" bg="neutralLight.1">
+      <Flex ml="240px" h="100%" w="calc(100vh + 100vh)" bg="neutralLight.1">
         <Flex mt="32px" ml="47" flexDirection="column">
           <Text
             textAlign="left"
