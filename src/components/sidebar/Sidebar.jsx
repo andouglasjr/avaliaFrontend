@@ -1,122 +1,33 @@
+//React Imports
 import React from "react";
-import {
-  Box,
-  Flex,
-  Drawer,
-  DrawerBody,
-  Icon,
-  useColorModeValue,
-  DrawerOverlay,
-  useDisclosure,
-  DrawerContent,
-  DrawerCloseButton,
-} from "@chakra-ui/react";
-import Content from "./components/Content";
-import {
-  renderThumb,
-  renderTrack,
-  renderView,
-} from "../scrollbar/Scrollbar";
-import { Scrollbars } from "react-custom-scrollbars-2";
-import PropTypes from "prop-types";
-import { IoMenuOutline } from "react-icons/io5";
 
-function Sidebar(props) {
-  const names = "Tema 1";
-  const { routes } = names;
+//Chakra UI Imports
+import { Flex } from "@chakra-ui/react";
 
-  let variantChange = "0.2s linear";
-  let shadow = useColorModeValue(
-    "14px 17px 40px 4px rgba(112, 144, 176, 0.08)",
-    "unset"
-  );
-  let sidebarBg = "neutralLight.0";
-  let sidebarMargins = "0px";
+//Sidebar Imports
+import Brand from "./components/Brand";
+import PerfilInteract from "./components/perfilInteract";
+import SidebarButtons from "./components/sidebarButtons";
 
-  // SIDEBAR
-  return (
-    <Box display={{ sm: "none", xl: "block" }} position="fixed" minH="100%">
-      <Box
-        bg={sidebarBg}
-        transition={variantChange}
-        w="206px"
-        h="calc(100vh - 80px)"
-        m={sidebarMargins}
-        minH="100%"
-        overflowX="hidden"
-        boxShadow={shadow}
-        mt="80px"
-      >
-        <Scrollbars
-          autoHide
-          renderTrackVertical={renderTrack}
-          renderThumbVertical={renderThumb}
-          renderView={renderView}
-        >
-          <Content routes={routes} />{" "}
-        </Scrollbars>{" "}
-      </Box>{" "}
-    </Box>
-  );
+//Others Imports
+import { CustomButton } from "../button/Button"
+
+function Sidebar() {
+    return(
+        <Flex position="fixed" direction="column" w="240px" h="100vh" bg="neutralLight.0">
+            <Flex w="240px" h="68px" bg="transparent">
+                <Brand />
+            </Flex>
+            <Flex direction="column" mt="1px" w="240px" h="628px" bg="transparent">
+                <CustomButton variant="secondary" mx="auto" mb="13px" mt="16px" marginLeft="12px" w="216px" label="Nova Redação" />
+                <SidebarButtons mx="auto" />
+            </Flex>
+            <Flex ml="12px" w="216px" h="1px" bg="neutralLight.1"/>
+            <Flex w="240px" h="calc(100vh - 696px)" bg="transparent">
+                <PerfilInteract label="Romero Brito" mx="auto" my="auto" />
+            </Flex>
+        </Flex>
+    )
 }
-
-export function SidebarResponsive(props) {
-  let sidebarBackgroundColor = useColorModeValue("neutralLight.0", "");
-  let menuColor = useColorModeValue("gray.400", "");
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
-
-  const { routes } = props;
-  // let isWindows = navigator.platform.startsWith("Win");
-  //  BRAND
-  return (
-    <Flex display={{ sm: "flex", xl: "none" }} alignItems="center">
-      <Flex ref={btnRef} w="max-content" h="max-content" onClick={onOpen}>
-        <Icon
-          as={IoMenuOutline}
-          color={menuColor}
-          my="auto"
-          w="20px"
-          h="20px"
-          me="10px"
-          _hover={{ cursor: "pointer" }}
-        />{" "}
-      </Flex>{" "}
-      <Drawer
-        isOpen={isOpen}
-        onClose={onClose}
-        placement={document.documentElement.dir === "rtl" ? "right" : "left"}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent w="285px" maxW="285px" bg={sidebarBackgroundColor}>
-          <DrawerCloseButton
-            zIndex="3"
-            onClose={onClose}
-            _focus={{ boxShadow: "none" }}
-            _hover={{ boxShadow: "none" }}
-          />{" "}
-          <DrawerBody maxW="285px" px="0rem" pb="0">
-            <Scrollbars
-              autoHide
-              renderTrackVertical={renderTrack}
-              renderThumbVertical={renderThumb}
-              renderView={renderView}
-            >
-              <Content routes={routes} />{" "}
-            </Scrollbars>{" "}
-          </DrawerBody>{" "}
-        </DrawerContent>{" "}
-      </Drawer>{" "}
-    </Flex>
-  );
-}
-// PROPS
-
-Sidebar.propTypes = {
-  logoText: PropTypes.string,
-  routes: PropTypes.arrayOf(PropTypes.object),
-  variant: PropTypes.string,
-};
 
 export default Sidebar;

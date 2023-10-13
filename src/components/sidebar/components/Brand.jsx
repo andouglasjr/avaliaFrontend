@@ -6,7 +6,7 @@ import { Box, useColorModeValue, Image } from "@chakra-ui/react";
 // Custom components
 import { HSeparator } from "../../separator/Separator";
 import logo from "../components/Logo.svg";
-import sublogo from "../components/SubLogo.svg";
+import sublogo from "../components/subLogo.svg";
 
 export function SidebarBrand() {
   //   Chakra color mode
@@ -15,13 +15,13 @@ export function SidebarBrand() {
 
   return (
     <Box
-    w="206px"
+    w="240px"
     h="80px"
     align="left" 
     direction="column" 
     bg={bgColor}
     >
-      <Image src={sublogo} w="206px" h="80px" alt="SubLogo" />
+      <Image src={sublogo} w="240px" h="80px" alt="SubLogo" />
     </Box>
   );
 }

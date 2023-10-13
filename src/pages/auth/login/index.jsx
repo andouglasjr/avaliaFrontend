@@ -202,7 +202,7 @@ function Login() {
             flexDirection="column"
             fontFamily="manrope"      
           >
-            <NavLink to="/landing/competences">
+            <NavLink to="/evaluationScreen">
               <Button
                 fontSize="sm"
                 variant="primary"

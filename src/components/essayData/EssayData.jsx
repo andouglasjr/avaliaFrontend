@@ -4,6 +4,8 @@ export default function EssayData(props) {
   if (!props.isAdmin) {
     return (
       <Flex
+        maxW={"592px"}
+        mb={"24px"}
         flexDir={"column"}
         alignItems={"flex-start"}
         padding={"32px"}
@@ -24,16 +26,7 @@ export default function EssayData(props) {
           <Text color={"neutralDark.0"} textAlign="left" width={"96px"}>Tema</Text>
           <Text textStyle="Body" textColor="neutralDark.4">{props.tema}</Text>
         </Flex>
-        <Flex
-          width={"556px"}
-          height={"28px"}
-          align={"flex-start"}
-          padding={"0"}
-          gap={"24px"}
-        >
-          <Text color={"neutralDark.0"} textAlign="left" width={"96px"}>Redatores</Text>
-          <Text textStyle="Body" textColor="neutralDark.4">{props.redatores}</Text>
-        </Flex>
+       
         <Flex
           width={"556px"}
           height={"28px"}
