@@ -1,54 +1,42 @@
-import { Text, Spacer, Stack } from "@chakra-ui/react";
+import React from "react";
+import { Flex, Box, Text } from "@chakra-ui/react";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Essay from "../../components/essay/Essay";
-import Competences from "../../components/competences/StudentCompetence";
-import getEssay from "../../components/essay/getEssay"; 
-import "../../App.css";
 import EssayData from "../../components/essayData/EssayData";
-import React, {useState, useEffect} from "react";
+import Essay from "../../components/essay/Essay";
+import StudentCompetence from "../../components/competences/StudentCompetence";
 
 function EvaluationScreen() {
-
-    const [number, setNumber] = useState('-');
-
-    useEffect(() => {
-        fetch('', 
-        {
-            method:'GET', 
-            mode: 'no-cors',
-            headers: {
-                "Content-Type": "application/json",
-              },
-        })
-        .then(response => {
-           
-            console.log(response.ok);
-            const jsonResponse = {"turnCompetencesPage":[{"number":"000001"}]}
-            return jsonResponse;
-        })
-        .then(turnCompetencesPage => {
-            const competencesPage = turnCompetencesPage.turnCompetencesPage;
-            const number = competencesPage[0].number;
-            setNumber(number);
-        })
-        .catch(error => {
-            console.error('Erro na requisição:', error);
-        });
-    }, []);
-
   return (
     <div>
-      <Stack direction="column" alignContent="left" bg="neutralLight.1">
-        <Text mt="32px" textAlign="Left" textStyle="h3">Redação { number }</Text>
-        <Stack direction="row" mt="22px" bg="transparent">
-          <Stack direction="column" bg="transparent">
-            <EssayData />
-            <Essay />
-          </Stack>
-          <Spacer />
-          <Competences />
-        </Stack>
-      </Stack>
+      <Sidebar />
+      <Flex ml="240px" h="100vh" w="calc(100vh + 100vh)" bg="neutralLight.1">
+        <Flex mt="32px" ml="47" flexDirection="column">
+          <Text
+            textAlign="left"
+            mb="32px"
+            h="44px"
+            w="1032px"
+            textStyle="h3"
+            textColor="neutralDark.4"
+          >
+            Redação 000001
+          </Text>
+          <Flex flexDirection="row">
+            <Flex flexDirection="column">
+              <EssayData
+                anulada="Não"
+                nota="500"
+                redatores="Reika Dantas"
+                tema="Guerra em Israel"
+              />
+              <Essay />
+            </Flex>
+            <Flex ml="28px" w="416px" h="126px">
+              <StudentCompetence />
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
     </div>
   );
 }

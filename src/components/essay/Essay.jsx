@@ -4,7 +4,8 @@ import essaySvg from '../../assets/img/essay/essay_svg2.svg';
 import React, { useState, useRef } from 'react';
 
 export default function Essay(props) {
-  const [originalTextareaValue, setOriginalTextareaValue] = useState("");
+  const essayDefault = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nibh libero, pretium nec accumsan sed, euismod in mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Nam tempus congue mauris sed euismod. Nunc neque sapien, tempor sit amet nunc non, porttitor iaculis neque. Maecenas consequat ex mattis augue volutpat, sit amet hendrerit ex ultricies. Fusce vulputate tortor in lectus gravida suscipit. Phasellus eu turpis egestas, porttitor sem a, imperdiet nibh. Ut consequat purus sollicitudin, congue tellus non, gravida est. Donec eget ligula consequat, gravida orci nec, venenatis metus."
+  const [originalTextareaValue, setOriginalTextareaValue] = useState(essayDefault);
   const [textareaValue, setTextareaValue] = useState(originalTextareaValue);
   const [isEditing, setIsEditing] = useState(false);
   const textareaRef = useRef(null);
@@ -30,6 +31,7 @@ export default function Essay(props) {
 
   return (
     <Flex
+      mb="32px"
       flexDir="column"
       alignItems="flex-start"
       backgroundColor="neutralLight.0"
@@ -37,11 +39,11 @@ export default function Essay(props) {
       borderRadius="16px"
       boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.16)"
       borderColor="neutralLight.2"
-      width="620px"
+      width="592px"
       height="1209px"
     >
       <Flex
-        width="620px"
+        width="592px"
         height="65px"
         padding="16.5px 24px"
         borderBottom="1px solid"

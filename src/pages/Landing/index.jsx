@@ -1,11 +1,6 @@
-import { Text, Spacer, Stack } from "@chakra-ui/react";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Essay from "../../components/essay/Essay";
-import Competences from "../../components/competences/StudentCompetence";
-import getEssay from "../../components/essay/getEssay"; 
+import { Text, Stack } from "@chakra-ui/react";
 import "../../App.css";
-import EssayData from "../../components/essayData/EssayData";
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 
 function Landing() {
 
