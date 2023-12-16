@@ -10,6 +10,7 @@ import PerfilInteract from "./components/perfilInteract";
 import List from "./components/buttonList";
 
 //Others Imports
+
 import { CustomButton } from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
