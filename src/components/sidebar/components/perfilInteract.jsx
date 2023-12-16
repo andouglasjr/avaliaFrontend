@@ -9,7 +9,7 @@ import avatar from "../../../assets/img/avatars/avatar5.png"
 import { DotIcon } from "../../icons/Icons";
 
 function perfilInteract(props) {
-    const { label, my, extra, mx, mb, mt, icon, w, h, ml, ...rest } = props;
+    const { label, my, extra, mx, mb, mt, icon, w, h, ml, zIndex, ...rest } = props;
 
     return(
         <Flex direction="row" my={my} mx={mx} mt={mt} ml={ml} w="216px" h="40px" bg="transparent" p="8px">
@@ -24,7 +24,7 @@ function perfilInteract(props) {
                 bottom="12px"
                 />
                 <MenuList>
-                <MenuItem textStyle="Button" href="" command='⌘T'>
+                <MenuItem textStyle="Button" href="/login" command='⌘T'>
                     Exemplo de Notificação 1
                 </MenuItem>
                 <MenuItem textStyle="Button" href="" command='⌘T'>

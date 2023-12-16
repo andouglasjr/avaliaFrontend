@@ -18,9 +18,11 @@ import StatusBadge from "../statusBadge/StatusBadge";
 import { PlusIcon, LessIcon } from "../icons/Icons";
 
 function checkStatusBadgeColor(grade) {
-  if (grade < 200) {
+  if (grade < 400) {
     return 'red'
-  } else {
+  } else if (grade >= 400 && grade < 700) {
+    return 'yellow'
+  } else if (grade >= 700 && grade <= 1000) {
     return 'green'
   }
 }
@@ -38,43 +40,43 @@ export default function StudentCompetence() {
     })
       .then((response) => {
         const jsonResponse = {
-          turnRevisor: [
+          turnReviewer: [
             {
-              nome: "ChatGPT",
+              name: "ChatGPT",
               DL: 3,
               CF: 4,
               SP: 5,
               CA: 5,
               EP: 5,
-              Total: "100",
-              Comentario1: "Bastantes erros.",
-              Comentario2:
+              Total: "500",
+              Comment1: "Bastantes erros.",
+              Comment2:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-              Comentario3: "Ótimo!",
-              Comentario4: "Perfeito!",
-              Comentario5: "Muito Bom!",
+              Comment3: "Ótimo!",
+              Comment4: "Perfeito!",
+              Comment5: "Muito Bom!",
             },
             {
-              nome: "Reika Dantas",
+              name: "Reika Dantas",
               DL: 3,
               CF: 4,
               SP: 5,
               CA: 5,
               EP: 5,
               Total: "800",
-              Comentario1: "fkduajçflkjadçlkfja",
-              Comentario2:
+              Comment1: "fkduajçflkjadçlkfja",
+              Comment2:
                 "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-              Comentario3: "Ótimo!",
-              Comentario4: "Perfeito!",
-              Comentario5: "Muito Bom!",
+              Comment3: "Ótimo!",
+              Comment4: "Perfeito!",
+              Comment5: "Muito Bom!",
             },
           ],
         };
         return jsonResponse;
       })
-      .then((turnRevisor) => {
-        const reviewers = turnRevisor.turnRevisor;
+      .then((turnReviewer) => {
+        const reviewers = turnReviewer.turnReviewer;
         setReviewers(reviewers);
       })
       .catch((error) => {
@@ -120,7 +122,7 @@ export default function StudentCompetence() {
         </Flex>
         {reviewers.map((reviewer) => (
           <Flex
-            display={reviewer.nome == null ? "none" : "block"}
+            display={reviewer.name == null ? "none" : "block"}
             minH="44px"
             bg="neutralLight.1"
             alignItems="left"
@@ -142,7 +144,7 @@ export default function StudentCompetence() {
                       alt="GPTLogo"
                     />
                     <Text my="16px" textStyle="Body1">
-                      {reviewer.nome || null}
+                      {reviewer.name || null}
                     </Text>
                     <Spacer />
                     <StatusBadge
@@ -234,7 +236,7 @@ export default function StudentCompetence() {
                               textStyle="Body"
                               textColor="neutralDark.4"
                             >
-                              {reviewer.Comentario1}
+                              {reviewer.Comment1}
                             </Text>
                             <Spacer />
                           </Stack>
@@ -317,7 +319,7 @@ export default function StudentCompetence() {
                               textStyle="Body"
                               textColor="neutralDark.4"
                             >
-                              {reviewer.Comentario2}
+                              {reviewer.Comment2}
                             </Text>
                             <Spacer />
                           </Stack>
@@ -394,7 +396,7 @@ export default function StudentCompetence() {
                               textStyle="Body"
                               textColor="neutralDark.4"
                             >
-                              {reviewer.Comentario3}
+                              {reviewer.Comment3}
                             </Text>
                             <Spacer />
                           </Stack>
@@ -469,7 +471,7 @@ export default function StudentCompetence() {
                               textStyle="Body"
                               textColor="neutralDark.4"
                             >
-                              {reviewer.Comentario4}
+                              {reviewer.Comment4}
                             </Text>
                             <Spacer />
                           </Stack>
@@ -550,7 +552,7 @@ export default function StudentCompetence() {
                               textStyle="Body"
                               textColor="neutralDark.4"
                             >
-                              {reviewer.Comentario5}
+                              {reviewer.Comment5}
                             </Text>
                             <Spacer />
                           </Stack>

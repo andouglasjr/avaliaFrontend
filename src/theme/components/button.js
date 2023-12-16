@@ -116,6 +116,10 @@ export const buttonStyles = {
                     _hover: {
                         color: "purple.1",
                     },
+                    _focus: {
+                        border: "none",
+                        borderColor: "transparent"
+                    }
                 }),
                 off: (props) => ({
                     bg: mode("", "")(props),

@@ -41,6 +41,7 @@ export default function Essay(props) {
       borderColor="neutralLight.2"
       width="592px"
       height="1209px"
+      zIndex={0}
     >
       <Flex
         width="592px"
