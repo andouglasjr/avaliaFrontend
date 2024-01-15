@@ -1,6 +1,5 @@
 import React from "react";
-import { Flex, Box, Text } from "@chakra-ui/react";
-import Sidebar from "../../components/sidebar/Sidebar";
+import { Flex, Text } from "@chakra-ui/react";
 import EssayData from "../../components/essayData/EssayData";
 import Essay from "../../components/essay/Essay";
 import StudentCompetence from "../../components/competences/StudentCompetence";
@@ -8,8 +7,8 @@ import StudentCompetence from "../../components/competences/StudentCompetence";
 function EvaluationScreen() {
   return (
     <div>
-      <Sidebar />
-      <Flex ml="240px" h="100vh" w="calc(100vh + 100vh)" bg="neutralLight.1">
+      <Flex h="100%" w="calc(100vh + 100vh)" bg="neutralLight.1">
+        <Flex w="240px" h="100%" bg="neutralLight.1" />
         <Flex mt="32px" ml="47" flexDirection="column">
           <Text
             textAlign="left"
