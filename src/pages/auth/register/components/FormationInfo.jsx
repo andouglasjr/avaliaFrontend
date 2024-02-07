@@ -9,6 +9,9 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+
+import formationInfoValidations from "./validations/formationInfoValidations";
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -16,7 +19,6 @@ const FormationInfo = ({ page, setPage, formData, setFormData, firstClick, setFi
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const brandStars = useColorModeValue("brand.500", "brand.400");
-  const formationInfoValidations = require("./validations/formationInfoValidations")
 
   const fileNameClicked = () => {setFirstClick({...firstClick, filename: true})}
   const fileClicked = () => {setFirstClick({...firstClick, file: true})}

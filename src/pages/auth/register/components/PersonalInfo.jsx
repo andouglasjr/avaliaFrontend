@@ -14,6 +14,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
+import personalInfoValidations from "./validations/personalInfoValidations";
+
 import { mode } from "@chakra-ui/theme-tools";
 import { motion } from "framer-motion";
 
@@ -23,7 +25,6 @@ const PersonalInfo = ({ page, setPage, formData, setFormData, firstClick, setFir
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
-  const personalInfoValidations = require("./validations/personalInfoValidations")
 
   const profileClicked = () =>{setFirstClick({...firstClick, profile: true})}
   const nameClicked = () =>{setFirstClick({...firstClick, name: true})}

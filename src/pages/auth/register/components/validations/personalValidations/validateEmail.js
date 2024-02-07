@@ -1,4 +1,4 @@
-module.exports = function validateEmail (EMAIL){
+export default function ValidateEmail(EMAIL) {
   let email = String(EMAIL)
   const regexNumbers = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
   if (email.length == 0) {
@@ -8,4 +8,4 @@ module.exports = function validateEmail (EMAIL){
     return false
   }
   return true
-} 
+}

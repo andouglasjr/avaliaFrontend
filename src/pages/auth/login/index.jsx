@@ -1,5 +1,8 @@
-import React from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState,} from "react";
 import { NavLink } from "react-router-dom";
+
+import { useAuth } from "./authToken";
+
 // Chakra imports
 import {
   Button,
@@ -22,11 +25,34 @@ import axios from "axios";
 import Toast from "../../../components/toast/ToastFunctions";
 import loginValidations from "./validations/loginValidations";
 import { BrandIconBlue } from "../../../components/icons/Icons";
+
+import { useNavigate } from "react-router-dom";
+
 function Login() {
   // Chakra color mode
   const purple3 = useColorModeValue("purple.3", "purple.3")
   const neutralDark0 = useColorModeValue("neutralDark.0","neutralDark.0")
   const neutralDark4 = useColorModeValue("neutralDark.4", "neutralDark.4")
+
+  //PassCorfimed
+  const [pathLogin, setPathLogin] = React.useState(false);
+  const navigate = useNavigate();
+  const { setToken } = useAuth();
+  const [accessToken, setAccessToken] = useState('');
+  //const [tokenExpiration, setTokenExpiration] = useState(null);
+
+  if (pathLogin == true) {
+    setPathLogin(false)
+    
+    const handleLogin = () => {
+      setToken(accessToken);
+      navigate("/generationScreen", { replace: true });
+    };
+  
+    setTimeout(() => {
+      handleLogin();
+    }, 3 * 1000);
+  }
 
   // React States
   const handleClick = () => setShow(!show);
@@ -34,18 +60,18 @@ function Login() {
   const [login, setLogin] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
   const [formData, setFormData] = React.useState({
-    email: "",
-    password: "",
+    email: "string",
+    password: "string"
   });
   const [click, setClick] = React.useState({
     email: false,
     password: false
   })
-  // Validations States
-  
 
+  // Validations States
   const emailClicked = () => {setClick({...click, email: true})}
   const passwordClicked = () => {setClick({...click, password: true})}
+
   // Login request
   React.useEffect(() => {
     if (login) {
@@ -55,20 +81,19 @@ function Login() {
         .post("http://localhost:5000" + "/auth/login", formData)
         .then((response) => {
           setErrorMsg(response.data.message);
+          setPathLogin(true)
+          setAccessToken(response.data.data.accessToken);
+
+          //const expires_in = response.data.data
+          //const expirationTime = Date.now() + expires_in * 1000;
         })
         .catch(function (error) {
           if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
             console.log(error.response.data.message);
             setErrorMsg(error.response.data.message);
           } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
             console.log(error.request);
           } else {
-            // Something happened in setting up the request that triggered an Error
             console.log("Error", error.message);
           }
           console.log(error.config);
@@ -202,22 +227,19 @@ function Login() {
             flexDirection="column"
             fontFamily="manrope"      
           >
-            <NavLink to="/generationScreen">
-              <Button
-                fontSize="sm"
-                variant="primary"
-                fontWeight="700"
-                w="100%"
-                h="40px"
-                mb="16px"
-                onClick={() => {
-                  setLogin(true);
-                }}
-
+            <Button
+              fontSize="sm"
+              variant="primary"
+              fontWeight="700"
+              w="100%"
+              h="40px"
+              mb="16px"
+              onClick={() => {
+                setLogin(true);
+              }}
               >
-                Entrar
-              </Button>
-            </NavLink>
+              Entrar
+            </Button>
 
             <NavLink to="/auth/sign-up">
             <Button

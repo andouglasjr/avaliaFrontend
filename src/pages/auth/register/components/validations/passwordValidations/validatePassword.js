@@ -1,4 +1,4 @@
-module.exports = function validatePassword (PASSWORD){
+export default function validatePassword (PASSWORD){
   const pass = String(PASSWORD)
   const regex = /^(?=.*\d)(?=.*[._?,!@#$%^&*])(?=.*[A-Z]).{8,}$/
   if (regex.test(pass)){

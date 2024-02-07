@@ -1,38 +1,42 @@
-import { Box } from "@chakra-ui/react";
+import React from 'react';
+import { Box } from '@chakra-ui/react';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 
-import React from "react";
-
-export const renderTrack = ({ style, ...props }) => {
-  const trackStyle = {
-    position: "absolute",
-    maxWidth: "100%",
-    width: 6,
-    transition: "opacity 200ms ease 0s",
-    opacity: 0,
-    background: "transparent",
-    bottom: 2,
-    top: 2,
-    borderRadius: 3,
-    right: 0,
-  };
-  return <div style={{ ...style, ...trackStyle }} {...props} />;
-};
-export const renderThumb = ({ style, ...props }) => {
-  const thumbStyle = {
-    borderRadius: 15,
-    background: "rgba(222, 222, 222, .1)",
-  };
-  return <div style={{ ...style, ...thumbStyle }} {...props} />;
-};
-export const renderView = ({ style, ...props }) => {
-  const viewStyle = {
-    marginBottom: -22,
-  };
+// Componente de Scrollbar personalizado
+const CustomScrollbar = ({ children }) => {
   return (
-    <Box
-      me={{ base: "0px !important", lg: "-16px !important" }}
-      style={{ ...style, ...viewStyle }}
-      {...props}
-    />
+    <Scrollbars
+      autoHide
+      autoHideTimeout={1000}
+      autoHideDuration={200}
+      renderThumbVertical={({ style, ...props }) => (
+        <div
+          {...props}
+          style={{
+            ...style,
+            backgroundColor: '#4A5568', // Cor do thumb
+            borderRadius: '4px',
+          }}
+        />
+      )}
+    >
+      {children}
+    </Scrollbars>
   );
 };
+
+// Exemplo de uso
+const App = () => {
+  return (
+    <Box w="300px" h="200px" border="1px solid #CBD5E0">
+      <CustomScrollbar>
+        {/* Seu conteúdo aqui */}
+        <Box p="4">
+          {/* Seu conteúdo aqui */}
+        </Box>
+      </CustomScrollbar>
+    </Box>
+  );
+};
+
+export default App;

@@ -1,4 +1,4 @@
-module.exports = function validateFileName(FILENAME){
+export default function validateFileName(FILENAME){
   if (FILENAME < 2) {
     return false
   }

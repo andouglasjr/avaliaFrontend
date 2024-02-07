@@ -1,10 +1,10 @@
-const validateCity = require("./addressValidations/validateCity")
-const validateNeighborhood = require("./addressValidations/validateNeighborhood")
-const validateNumber = require("./addressValidations/validateNumber")
-const validateState = require("./addressValidations/validateState")
-const validateStreet = require("./addressValidations/validateStreet")
+import validateCity from "./addressValidations/validateCity";
+import validateNeighborhood from "./addressValidations/validateNeighborhood";
+import validateNumber from "./addressValidations/validateNumber";
+import validateState from "./addressValidations/validateState";
+import validateStreet from "./addressValidations/validateStreet";
 
-module.exports = class AddressValidations {
+export default class AddressValidations {
   static verifyCEP(erro, click) {
     if (!erro || !click) {
       let variant = "input_primary"

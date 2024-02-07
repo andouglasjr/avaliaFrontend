@@ -1,7 +1,7 @@
-const validateFileName = require("./formationValidations/validateFileName")
-const validateFile = require("./formationValidations/validateFile")
+import validateFileName from "./formationValidations/validateFileName";
+import validateFile from "./formationValidations/validateFile";
 
-module.exports = class formationValidations{
+export default class formationValidations{
   static fileNameValidation(fileName, click){
     if (validateFileName(fileName) || !click) {
       let variant = "input_primary"

@@ -1,6 +1,6 @@
-const validatePassword = require("./passwordValidations/validatePassword")
+import validatePassword from "./passwordValidations/validatePassword";
 
-module.exports = class passwordValidations{
+export default class passwordValidations{
   static validatePassword(password, click){
     if (validatePassword(password) || !click) {
       let variant = "input_primary"
