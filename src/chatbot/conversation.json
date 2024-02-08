@@ -1,0 +1,410 @@
+{
+    "steps": [
+        {
+            "id": "1",
+            "message": {
+                "first": [
+                    "Olá, {user}! Eu sou a LIA, a inteligência artificial do aval.ia e irei te ajudar a evoluir suas habilidades de escrita. Sou capaz de lhe propor temas, gerar e corrigir redações, além de propor textos motivadores para temas diversos. O que você quer fazer?"
+                ],
+                "next": [
+                    "Oi, {user}! O que você deseja fazer hoje?",
+                    "Olá, {user}! Comece escolhendo o que você quer fazer."
+                ],
+                "flow": []
+            },
+            "response_type": "button",
+            "options": [
+                {
+                    "message": "Quero digitar uma redação.",
+                    "trigger": "2"
+                },
+                {
+                    "message": "Quero que você gere uma redação para mim.",
+                    "trigger": "3"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "message": {
+                "first": [
+                    "Ótimo! Você pensou em um tema específico ou quer que eu faça isso pra você? Eu posso sugerir temas e gerar textos motivadores para você ter uma base para escrever sua redação, da mesma forma como acontece no ENEM."
+                ],
+                "next": [
+                    "Certo! Você pensou em um tema específico ou quer que eu faça isso pra você?"
+                ],
+                "flow": []
+            },
+            "response_type": "button",
+            "options": [
+                {
+                    "message": "Tenho um tema.",
+                    "trigger": "4"
+                },
+                {
+                    "message": "Gere pra mim.",
+                    "trigger": "5"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "message": {
+                "first": [
+                    "Ótimo! Você pensou em um tema específico ou quer que eu faça isso pra você? Eu posso sugerir temas e gerar textos motivadores para você ter uma base para escrever sua redação, da mesma forma como acontece no ENEM."
+                ],
+                "next": [
+                    "Certo! Você pensou em um tema específico ou quer que eu faça isso pra você?"
+                ],
+                "flow": []
+            },
+            "response_type": "button",
+            "options": [
+                {
+                    "message": "Tenho um tema.",
+                    "trigger": "6"
+                },
+                {
+                    "message": "Gere pra mim.",
+                    "trigger": "7"
+                },
+                {
+                    "message": "Gere tudo: tema, textos motivadores e redação",
+                    "trigger": "8"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "message": {
+                "first": [
+                    "Escreva o tema da redação para que eu possa gerar textos motivadores."
+                ],
+                "next": [
+                    "Escreva o tema da redação para que eu possa gerar textos motivadores."
+                ],
+                "flow": []
+            },
+            "response_type": "input",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "15"
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "message": {
+                "first": [
+                    "Ok! Faço isso pra você. Posso gerar temas de trẽs formas diferentes: \n\n Baseado em palavras-chave indicadas por você;\n A partir da minha base de dados de temas antigos do ENEM;\n Ou ainda de forma aleatória, baseado em uma anáĺise de temas possíveis de aparecer, seguindo o padrão do INEP. Qual a forma que você deseja?"
+                ],
+                "next": [
+                    "Ok! Faço isso pra você. Como você deseja que eu gere os temas?"
+                ],
+                "flow": []
+            },
+            "response_type": "button",
+            "options": [
+                {
+                    "message": "Vou lhe passar o que eu quero.",
+                    "trigger": "9"
+                },
+                {
+                    "message": "Quero temas que já caíram em anos anteriores!",
+                    "trigger": "10"
+                },
+                {
+                    "message": "Crie um novo tema",
+                    "trigger": "11"
+                }
+            ]
+        },
+        {
+            "id": "6",
+            "message": {
+                "first": [
+                    "Escreva o tema que você escolheu para a redação"
+                ],
+                "next": [
+                    "Escreva o tema que você escolheu para a redação"
+                ],
+                "flow": []
+            },
+            "response_type": "input",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "12"
+                }
+            ]
+        },
+        {
+            "id": "7",
+            "message": {
+                "first": [
+                    "Ok! Faço isso pra você. Posso gerar temas de trẽs formas diferentes: \n\n +Baseado em palavras-chave indicadas por você; \nA partir da minha base de dados de temas antigos do ENEM; \nOu ainda de forma aleatória, baseado em uma anáĺise de temas possíveis de aparecer, seguindo o padrão do INEP. Qual a forma que você deseja?"
+                ],
+                "next": [
+                    "Ok! Faço isso pra você. Como você deseja que eu gere os temas?"
+                ],
+                "flow": []
+            },
+            "response_type": "button",
+            "options": [
+                {
+                    "message": "Vou lhe passar o que eu quero.",
+                    "trigger": "16"
+                },
+                {
+                    "message": "Quero temas que já caíram em anos anteriores!",
+                    "trigger": "17"
+                },
+                {
+                    "message": "Gere pra mim.",
+                    "trigger": "8"
+                }
+            ]
+        },
+        {
+            "id": "8",
+            "message": {
+                "first": [
+                    "Então deixe comigo! Vou começar gerando o tema da redação."
+                ],
+                "next": [
+                    "Ok! Faço isso pra você. Como você deseja que eu gere os temas?"
+                ],
+                "flow": [
+                    "Pronto! Gerei algumas opções de tema. Escolha um deles para seguir:"
+                ]
+            },
+            "response_type": "select",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "13"
+                }
+            ]
+        },
+        {
+            "id": "9",
+            "message": {
+                "first": [
+                    "Informe frases ou palavras-chave, separando-as por vírgulas."
+                ],
+                "next": [
+                    "Informe frases ou palavras-chave, separando-as por vírgulas."
+                ],
+                "flow": []
+            },
+            "response_type": "input",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "14"
+                }
+            ]
+        },
+        {
+            "id": "10",
+            "message": {
+                "first": [
+                    "Ok! Vou procurar um tema aqui pra você..."
+                ],
+                "next": [
+                    "Ok! Vou procurar um tema aqui pra você..."
+                ],
+                "flow": [
+                    "Pronto! O tema escolhido foi {tema}, do ENEM {ano}.",
+                    "Agora estou gerando os textos motivadores para o tema {tema}. Em breve você vai ser redirecionado para o nosso espaço de escrita da redação..."
+                ]
+            },
+            "response_type": "end",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": ""
+                }
+            ]
+        },
+        {
+            "id": "11",
+            "message": {
+                "first": [
+                    "Pronto! Gerei algumas opções de tema. Escolha um deles para seguir:"
+                ],
+                "next": [
+                    "Pronto! Gerei algumas opções de tema. Escolha um deles para seguir:"
+                ],
+                "flow": []
+            },
+            "response_type": "select",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "15"
+                }
+            ]
+        },
+        {
+            "id": "12",
+            "message": {
+                "first": [
+                    "Excelente! Estou gerando a redação e textos motivadores para o tema {tema}. Logo você poderá visualizar sua redação."
+                ],
+                "next": [
+                    "Excelente! Estou gerando a redação e textos motivadores para o tema “tema”. Logo você poderá visualizar sua redação."
+                ],
+                "flow": []
+            },
+            "response_type": "end",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": ""
+                }
+            ]
+        },
+        {
+            "id": "13",
+            "message": {
+                "first": [
+                    "Pronto! O tema escolhido foi {tema}. Agora, vou gerar a redação e os textos motivadores. Por favor, aguarde um pouco..."
+                ],
+                "next": [
+                    "Pronto! O tema escolhido foi {tema}. Agora, vou gerar a redação e os textos motivadores. Por favor, aguarde um pouco..."
+                ],
+                "flow": [
+                    "Tudo certo! Agora vou mandar você pra nosso espaço de redação para você estudar a redação que foi gerada."
+                ]
+            },
+            "response_type": "end",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": ""
+                }
+            ]
+        },
+        {
+            "id": "14",
+            "message": {
+                "first": [
+                    "Com base nas suas instruções, gerei algumas opções de tema. Escolha um deles para seguir:"
+                ],
+                "next": [
+                    "Com base nas suas instruções, gerei algumas opções de tema. Escolha um deles para seguir:"
+                ],
+                "flow": []
+            },
+            "response_type": "select",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "15"
+                }
+            ]
+        },
+        {
+            "id": "15",
+            "message": {
+                "first": [
+                    "Excelente! Estou gerando os textos motivadores para o tema {tema}. Em breve você vai ser redirecionado para o nosso espaço de escrita da redação..."
+                ],
+                "next": [
+                    "Excelente! Estou gerando os textos motivadores para o tema {tema}. Em breve você vai ser redirecionado para o nosso espaço de escrita da redação..."
+                ],
+                "flow": []
+            },
+            "response_type": "end",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": ""
+                }
+            ]
+        },
+        {
+            "id": "16",
+            "message": {
+                "first": [
+                    "Informe frases ou palavras-chave, separando-as por vírgulas."
+                ],
+                "next": [
+                    "Informe frases ou palavras-chave, separando-as por vírgulas."
+                ],
+                "flow": []
+            },
+            "response_type": "input",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "19"
+                }
+            ]
+        },
+        {
+            "id": "17",
+            "message": {
+                "first": [
+                    "Ok! Vou procurar um tema aqui pra você..."
+                ],
+                "next": [
+                    "Ok! Vou procurar um tema aqui pra você..."
+                ],
+                "flow": [
+                    "Pronto! O tema escolhido foi {tema} do ENEM {ano}.",
+                    "Agora estou gerando os textos motivadores e a redação para o tema “tema ”. Logo você poderá visualizar sua redação."
+                ]
+            },
+            "response_type": "end",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": ""
+                }
+            ]
+        },
+        {
+            "id": "19",
+            "message": {
+                "first": [
+                    "Com base nas suas instruções, gerei algumas opções de tema. Escolha um deles para seguir:"
+                ],
+                "next": [
+                    "Com base nas suas instruções, gerei algumas opções de tema. Escolha um deles para seguir:"
+                ],
+                "flow": [
+                ]
+            },
+            "response_type": "select",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": "20"
+                }
+            ]
+        },
+        {
+            "id": "20",
+            "message": {
+                "first": [
+                    "Excelente! Estou gerando os textos motivadores e a redação para o tema {tema}. Logo você poderá visualizar sua redação."
+                ],
+                "next": [
+                    "Excelente! Estou gerando os textos motivadores e a redação para o tema {tema}. Logo você poderá visualizar sua redação."
+                ],
+                "flow": [
+                ]
+            },
+            "response_type": "end",
+            "options": [
+                {
+                    "message": "",
+                    "trigger": ""
+                }
+            ]
+        }
+    ]
+}
