@@ -7,7 +7,7 @@ import EvaluationScreen from "./pages/EvaluationScreen";
 import UserMain from "./pages/UserMain";
 import Landing from "./pages/Landing";
 import EssayGenerationLoading from "./pages/Loading";
-import GenerationScreen from "./pages/generationScreen";
+import GenerationScreen from "./pages/GenerationScreen";
 import Sidebar from "./components/sidebar/Sidebar";
 
 function RoutesComponentsWithSidebar() {
@@ -40,7 +40,7 @@ function RoutesComponentsWithSidebar() {
       <Routes>
         <Route path="/evaluationScreen" element={<EvaluationScreen />} />
         <Route path="/generationScreen" element={<GenerationScreen />} />
-        <Route path="/loading" element={<EssayGenerationLoading />} />
+       
       </Routes>
     </div>
   );
@@ -53,6 +53,7 @@ function RoutesComponents() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/userMain" element={<UserMain />} />
+        <Route path="/loading" element={<EssayGenerationLoading />} />
       </Routes>
       <RoutesComponentsWithSidebar />
     </div>

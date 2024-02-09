@@ -27,7 +27,7 @@ export const buttonStyles = {
                     fontSize: "14px",
                     color: "white",
                     _focus: {
-                        bg: mode("purple.3", "")(props),
+                        bg: mode("purple.1", "")(props),
                         borderColor: "cyan.2",
                         borderWidth: "2px",
                         borderStyle: "solid",

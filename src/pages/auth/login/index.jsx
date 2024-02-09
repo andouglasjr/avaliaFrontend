@@ -202,7 +202,7 @@ function Login() {
             flexDirection="column"
             fontFamily="manrope"      
           >
-            <NavLink to="/generationScreen">
+            <NavLink to="/loading" state={{isWelcomeLoading: true}}>
               <Button
                 fontSize="sm"
                 variant="primary"
