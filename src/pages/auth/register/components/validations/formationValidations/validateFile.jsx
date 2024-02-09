@@ -1,4 +1,4 @@
-module.exports =  function validateFile (FILE){
+export default function validateFile (FILE){
   if (FILE == "") {
     return false
   }

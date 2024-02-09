@@ -3,6 +3,7 @@ import { PencilIcon } from '../icons/Icons';
 import essaySvg from '../../assets/img/essay/essay_svg2.svg';
 import React, { useState, useRef } from 'react';
 import { Correct } from '../icons/Icons';
+import Comment from '../comment/comment';
 
 export default function Essay(props) {
   const essayDefault = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nibh libero, pretium nec accumsan sed, euismod in mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Nam tempus congue mauris sed euismod. Nunc neque sapien, tempor sit amet nunc non, porttitor iaculis neque. Maecenas consequat ex mattis augue volutpat, sit amet hendrerit ex ultricies. Fusce vulputate tortor in lectus gravida suscipit. Phasellus eu turpis egestas, porttitor sem a, imperdiet nibh. Ut consequat purus sollicitudin, congue tellus non, gravida est. Donec eget ligula consequat, gravida orci nec, venenatis metus."
@@ -14,7 +15,7 @@ export default function Essay(props) {
   const [isEditing, setIsEditing] = useState(false);
   const textareaRef = useRef(null);
 
-  const handleEditClick = () => {
+const handleEditClick = () => {
     setIsEditing(true);
     textareaRef.current.focus();
   };

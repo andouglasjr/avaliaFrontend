@@ -15,13 +15,13 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { mode } from "@chakra-ui/theme-tools";
 
+import addressValidations from "./validations/addressValidations"
+import validateCEP from "./validations/addressValidations/validateCEP"
+
 const AddressInfo = ({ page, setPage, formData, setFormData, firstClick, setFirstClick }) => {
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const brandStars = useColorModeValue("brand.500", "brand.400");
-
-  const addressValidations = require("./validations/addressValidations")
-  const validateCEP = require("./validations/addressValidations/validateCEP")
 
   const checkCEP = async (CEP) => {
     const response = await validateCEP(CEP)

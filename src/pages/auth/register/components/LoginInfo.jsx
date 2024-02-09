@@ -20,6 +20,8 @@ import { RiEyeCloseLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { mode } from "@chakra-ui/theme-tools";
 
+import passwordValidations from "./validations/passwordValidations";
+
 
 const LoginInfo = ({ page, setPage, formData, setFormData, firstClick, setFirstClick }) => {
 
@@ -31,7 +33,6 @@ const LoginInfo = ({ page, setPage, formData, setFormData, firstClick, setFirstC
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const brandStars = useColorModeValue("brand.500", "brand.400");
-  const passwordValidations = require("./validations/passwordValidations")
   
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);

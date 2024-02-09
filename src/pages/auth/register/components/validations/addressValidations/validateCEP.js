@@ -1,8 +1,8 @@
-module.exports = async function validarCEP(cep) {
+export default async function validarCEP(cep) {
   cep = String(cep)
   cep = cep.replace(/\D/g, '');
 
-  if (cep.length !== 8) {
+  if (cep.length != 8) {
       const data = ('CEP inválido. Certifique-se de digitar um CEP com 8 dígitos.');
       return [false, data]
   }else{

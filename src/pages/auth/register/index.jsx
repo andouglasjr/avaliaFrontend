@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 
 import { Flex, Progress } from "@chakra-ui/react";
 
@@ -7,44 +7,41 @@ import AddressInfo from "./components/AddressInfo";
 import LoginInfo from "./components/LoginInfo";
 import ProcessingRegister from "./components/ProcessingRegister";
 import FormationInfo from "./components/FormationInfo";
-import DefaultAuth from "layouts/auth/Default";
+import DefaultAuth from "./components/Default";
+
 function Register() {
   const [page, setPage] = useState(0);
+
   const [formData, setFormData] = useState({
     profile: "",
     name: "",
     email: "",
     cpf: "",
     birth_date: "",
+    password: "",
+    phone_number: "",
     street: "",
-    neighborhood: "",
     number: "",
-    state: "",
     city: "",
     zipcode: "",
-    phone_number: "",
-    password: "",
-    filename: "",
-    file: ""
+    neighborhood: ""
   });
+
   const [firstClick, setFirstClick] = useState({
     profile: false,
     name: false,
     email: false,
     cpf: false,
     birth_date: false,
+    password: false,
+    phone_number: false,
     street: false,
-    neighborhood: false,
     number: false,
-    state: false,
     city: false,
     zipcode: false,
-    phone_number: false,
-    password: false,
-    confirmPassword: false,
-    filename: false,
-    file: false
+    neighborhood: false,
   });
+
   const componentList = [
     <PersonalInfo
       page={page}
@@ -91,7 +88,7 @@ function Register() {
       <Flex
         mx={{ base: "auto", lg: "0px" }}
         h="100%"
-        alignItems="start"
+        alignItems="start" 
         
         mb={{ base: "30px", md: "60px" }}
         px={{ base: "0px", md: "0px" }}

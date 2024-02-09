@@ -1,7 +1,41 @@
 import React from "react";
 import { Flex, Spacer, Text, Image } from "@chakra-ui/react";
-import avatar from "../../../assets/img/avatars/avatar4.png";
 import { motion } from "framer-motion";
+
+import TextBoxComponent from "./textBoxComponent.jsx";
+
+/*
+<Flex
+          ml="213px"
+          mt="130px"
+          w="680px"
+          h="436px"
+          bg="transparent"
+          flexDirection="column"
+        >
+          <InputGroup mt="30px" w="680px" h="48px">
+            <Input
+              boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.16)"
+              w="full"
+              h="full"
+              textStyle="Caption"
+              textColor="neutralDark.4"
+              _placeholder={{ color: "neutralLight.4" }}
+              placeholder="Placeholder"
+              onChange={ handleInputChange }
+            />
+            <InputRightElement minH="full">
+              <IconButton
+                bg="neutralLight.1"
+                minH="full"
+                my="auto"
+                icon={<SendIcon boxSize="24px" color="neutralDark.0" />}
+                onClick={ handleInputButtonClick }
+              />
+            </InputRightElement>
+          </InputGroup>
+        </Flex>
+*/
 
 function chatComponent(props) {
   const { ml, mr, mt, mb, text, ...rest } = props;
@@ -14,9 +48,20 @@ function chatComponent(props) {
         mb={mb}
         mt={mt}
         mr={mr}
-        h="130px"
-        w="284px"
+        h="100vh"
+        w="calc(100vh + 100vh)"
       >
+        <Flex
+          bg="green"
+          overflowY="auto"
+          overflowX="hidden"
+          minW="680px"
+          maxH="675px"
+          ml="223px"
+          flexDirection="column"
+        >
+          <TextBoxComponent />
+        </Flex>
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -25,37 +70,7 @@ function chatComponent(props) {
             delay: 0.5,
             ease: [0, 0.71, 0.2, 1.01],
           }}
-        >
-          <Flex
-            borderTopRightRadius="8px"
-            borderTopLeftRadius="8px"
-            borderBottomLeftRadius="8px"
-            bg="neutralLight.4"
-            h="130px"
-            w="250px"
-          >
-            <Text
-              textAlign="left"
-              w="234px"
-              h="104px"
-              textColor="neutralDark.3"
-              textStyle="Caption"
-              ml="8px"
-              mt="8px"
-            >
-              {text}
-            </Text>
-          </Flex>
-        </motion.div>
-        <Spacer />
-        <Image
-          mt="96px"
-          width="24px"
-          height="24px"
-          borderRadius="9999px"
-          src={avatar}
-          alt="helper image"
-        />
+        ></motion.div>
       </Flex>
     </div>
   );

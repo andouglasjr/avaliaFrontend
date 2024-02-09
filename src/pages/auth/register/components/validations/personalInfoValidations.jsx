@@ -1,11 +1,11 @@
-const validateCPF = require("./personalValidations/validateCPF")
-const validatePhone = require("./personalValidations/validatePhone")
-const validateEmail = require("./personalValidations/validateEmail")
-const validateProfile = require("./personalValidations/validateProfile")
-const validateBirthDate = require("./personalValidations/validateBirthDate")
-const validateName = require("./personalValidations/validateName")
+import validateCPF from "./personalValidations/validateCPF";
+import validatePhone from "./personalValidations/validatePhone";
+import validateEmail from "./personalValidations/validateEmail";
+import validateProfile from "./personalValidations/validateProfile";
+import validateBirthDate from "./personalValidations/validateBirthDate";
+import validateName from "./personalValidations/validateName";
 
-module.exports = class validations{
+export default class validations{
   static cpfValidation(CPF, click){
     if (validateCPF(CPF) || !click) {
       let variant = "input_primary"

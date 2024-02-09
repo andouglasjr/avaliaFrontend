@@ -1,4 +1,4 @@
-module.exports = function validateProfile(PROFILE){
+export default function ValidateProfile(PROFILE) {
   if (PROFILE === "student" || PROFILE === "reviewer") {
     return true
   }

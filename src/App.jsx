@@ -1,12 +1,11 @@
-import RoutesComponents from "./routes";
-import { Box, Button, Link } from "@chakra-ui/react";
-import { Fragment } from "react";
+import AuthProvider from "./pages/auth/login/authToken";
+import Routes from "./routes/routes";
 
 function App() {
   return (
-      <Fragment>
-        <RoutesComponents />
-      </Fragment>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
   );
 }
 

@@ -88,3 +88,5 @@ export const FooterAuth = (props) => {
     </Flex>
   );
 }
+
+export default FooterAuth;

@@ -1,4 +1,4 @@
-module.exports = function validateState(STATE){
+export default function validateState(STATE){
 
   const state = STATE
   if (

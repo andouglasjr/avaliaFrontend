@@ -1,4 +1,4 @@
-module.exports = function validatePhone(PHONE) { 
+export default function ValidatePhone(PHONE) {
   let phone = String(PHONE)
   const regexNumbers = /^[0-9]+$/; // Expressão regular para dígitos numéricos
   if (phone.length == 0){
