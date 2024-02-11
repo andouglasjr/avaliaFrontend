@@ -17,7 +17,7 @@ export default function EssayData(props) {
         boxShadow={"0px 4px 6px 0px rgba(28, 31, 36, 0.26)"}
       >
         <Flex
-          
+
           align={"flex-start"}
           padding={"0"}
           gap={"24px"}
@@ -27,7 +27,7 @@ export default function EssayData(props) {
         </Flex>
 
         <Flex
-          
+
           align={"flex-start"}
           padding={"0"}
           gap={"24px"}
@@ -36,7 +36,7 @@ export default function EssayData(props) {
           <Text textStyle="Body" textColor="neutralDark.4">{props.nota}</Text>
         </Flex>
         <Flex
-          
+
           align={"flex-start"}
           padding={"0"}
           gap={"24px"}
@@ -49,31 +49,25 @@ export default function EssayData(props) {
   } else {
     return (
       <Flex
-        flexDir={"column"}
-        alignItems={"flex-start"}
-        padding={"32px"}
-        gap={"16px"}
-        backgroundColor={"neutralLight.0"}
-        border={"1px"}
-        borderColor={"neutralLight.2"}
-        height={"auto"}
-        width={"620px"}
-        boxSizing='borderBox'
+      minW={"592px"}
+      mb={"24px"}
+      flexDir={"column"}
+      alignItems={"flex-start"}
+      padding={"32px"}
+      gap={"16px"}
+      backgroundColor={"neutralLight.0"}
+      border={"1px"}
+      borderRadius={"16px"}
+      borderColor={"neutralLight.2"}
+      boxShadow={"0px 4px 6px 0px rgba(28, 31, 36, 0.26)"}
       >
         <Flex
-          width={"auto"}
-          height={"auto"}
-          align={"center"}
+          align={"flex-start"}
           padding={"0"}
           gap={"24px"}
         >
-          <Text color={"neutralDark.0"} width={"96px"}>Tema</Text>
-          <Input
-            isRequired={true}
-            variant="input_primary"
-            placeholder="Digite o tema da redação"
-            width={"436px"}
-          />
+          <Text color={"neutralDark.0"} textAlign="left" textStyle="Caption">Tema</Text>
+          <Text textStyle="Body" textColor="neutralDark.4" textAlign='left'  >{props.tema}</Text>
         </Flex>
         <Flex
           width={"auto"}
@@ -82,7 +76,7 @@ export default function EssayData(props) {
           padding={"0"}
           gap={"24px"}
         >
-          <Text color={"neutralDark.0"} width={"96px"} height={"auto"}>Anulada</Text>
+          <Text color={"neutralDark.0"} height={"auto"} >Anulada?</Text>
           <Radio padding={"10px 0px"}>Sim</Radio>
           <Radio padding={"10px 0px"}>Não</Radio>
         </Flex>

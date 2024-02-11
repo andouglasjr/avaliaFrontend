@@ -15,7 +15,7 @@ export default function Essay(props) {
   const [isEditing, setIsEditing] = useState(false);
   const textareaRef = useRef(null);
 
-const handleEditClick = () => {
+  const handleEditClick = () => {
     setIsEditing(true);
     textareaRef.current.focus();
   };
@@ -58,20 +58,24 @@ const handleEditClick = () => {
         alignItems="center"
       >
         <Text textStyle="Subtitle1">{props.essayName}</Text>
-        {isEditing ? (
-          <Flex alignItems="flex-start" gap="16px">
-            <Button onClick={handleCancelClick} variant="secondary">Cancelar</Button>
-            <Button onClick={handleSaveClick} variant="primary">Salvar</Button>
-          </Flex>
-        ) : (
-          <Button onClick={handleEditClick}><PencilIcon color="purple.2" /></Button>
+        {!props.Admin ? ("") : (
+          isEditing ? (
+            <Flex alignItems="flex-start" gap="16px">
+              <Button onClick={handleCancelClick} variant="secondary">Cancelar</Button>
+              <Button onClick={handleSaveClick} variant="primary">Salvar</Button>
+            </Flex>
+          ) : (
+            <Button onClick={handleEditClick}><PencilIcon color="purple.2" /></Button>
+
+          )
         )}
+
       </Flex>
 
       <Textarea
         _focus="none"
         rows="30"
-        readOnly={!isEditing}
+        readOnly={!isEditing || props.isAdmin}
         maxLength="1770"
         overflow="hidden"
         lineHeight="2.437"
@@ -87,16 +91,20 @@ const handleEditClick = () => {
         ref={textareaRef}
         textStyle="Caption"
       />
+      {props.isAdmin ? (
+        <Flex display="flex" justifyContent="space-between" align="center" w="100%" gap="16px" padding="16.5px 24px">
 
-      <Flex display="flex" justifyContent="space-between" align="center" w="100%" gap="16px" padding="16.5px 24px">
-        <Flex align="center">
-          <Correct color="neutralDark.0"></Correct>
-          <Text textAlign="center" textStyle="Caption" ml="6px" textColor="neutralDark.0">Racunho Salvo</Text>
-        </Flex>
-        <Button onClick={handleSaveClick} variant="primary">Enviar</Button>
-      </Flex>
+          <Flex align="center">
+            <div>
+              <Correct color="neutralDark.0"></Correct>
+              <Text textAlign="center" textStyle="Caption" ml="6px" textColor="neutralDark.0">Racunho Salvo</Text>
+            </div>
+          </Flex>
+
+          <Button onClick={handleSaveClick} variant="primary">Enviar</Button>
+        </Flex>) : ("")}
 
 
-    </Flex>
+    </Flex >
   );
 }

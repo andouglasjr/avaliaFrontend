@@ -43,12 +43,6 @@ function perfilInteract(props) {
                 <MenuItem textStyle="Button" onClick={ timeLogout } command='⌘T'>
                     Logout
                 </MenuItem>
-                <MenuItem textStyle="Button" href="" command='⌘T'>
-                    Exemplo de Notificação 2
-                </MenuItem>
-                <MenuItem textStyle="Button" href="" command='⌘T'>
-                    Exemplo de Notificação 3
-                </MenuItem>
                 </MenuList>
             </Menu>
         </Flex>

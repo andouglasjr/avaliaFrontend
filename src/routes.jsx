@@ -6,8 +6,9 @@ import Login from "./pages/auth/login";
 import EvaluationScreen from "./pages/EvaluationScreen";
 import UserMain from "./pages/UserMain";
 import Landing from "./pages/Landing";
-import EssayGenerationLoading from "./pages/Loading";
+import Loading from "./pages/Loading";
 import GenerationScreen from "./pages/GenerationScreen";
+import ReviewerDashboard from "./pages/ReviewerDashboard";
 import Sidebar from "./components/sidebar/Sidebar";
 
 function RoutesComponentsWithSidebar() {
@@ -26,20 +27,18 @@ function RoutesComponentsWithSidebar() {
     },
     {
       path: "/generationScreen",
-    },
-    {
-      path: "/loading",
-    },
+    }
   ];
 
   const pathVerification = mock.some((m) => m.path === pathFinal);
 
   return (
     <div>
-      {pathVerification ? <Sidebar /> : null}
+      {pathVerification ? <Sidebar userName={localStorage.getItem("userName")}/> : null}
       <Routes>
         <Route path="/evaluationScreen" element={<EvaluationScreen />} />
         <Route path="/generationScreen" element={<GenerationScreen />} />
+        <Route path="/reviewerDashboard" element={<ReviewerDashboard />} />
        
       </Routes>
     </div>
@@ -53,7 +52,7 @@ function RoutesComponents() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/userMain" element={<UserMain />} />
-        <Route path="/loading" element={<EssayGenerationLoading />} />
+        <Route path="/loading" element={<Loading />} />
       </Routes>
       <RoutesComponentsWithSidebar />
     </div>

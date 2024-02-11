@@ -67,7 +67,7 @@ export default function AccordionItemCompetence(props) {
                     ml="13px"
                     textColor="neutralDark.0"
                     marginRight="10px"
-                    textAlign="justify"
+                    textAlign="left"
 
                 >
                     <Text>
@@ -87,7 +87,7 @@ export default function AccordionItemCompetence(props) {
                             minH="120px"
                         >
                             <Text
-                                textAlign="justify"
+                                textAlign="left"
                                 mt="7px"
                                 ml="16px"
                                 mr="48px"

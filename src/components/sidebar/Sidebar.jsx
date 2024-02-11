@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 
 function Sidebar(props) {
   const { ml, mr, mt, mb, zIndex, ...rest } = props;
+  console.log(props)
 
   const navigate = useNavigate();
 
@@ -57,7 +58,7 @@ function Sidebar(props) {
         <Flex ml="12px" w="216px" h="1px" bg="neutralLight.1" />
         <Flex w="240px" h="5vh" bg="transparent">
           <PerfilInteract
-            label="Romero Brito"
+            label={props.userName}
             mx="auto"
             my="auto"
           />

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   HStack,
   Textarea,
@@ -15,454 +15,152 @@ import {
   Spacer,
   Flex,
 } from '@chakra-ui/react'
+import AccordionItemCompetenceReviewer from "./AccordionItemCompetenceReviewer";
+import axios from "axios";
 
-export default function ReviewerCompetence() {
-  const [DL, setDL] = useState(null);
-  const [CF, setCF] = useState(null);
-  const [SP, setSP] = useState(null);
-  const [CA, setCA] = useState(null);
-  const [EP, setEP] = useState(null);
 
-  const handleButtonClickDL = (value) => {
-    setDL(value);
+export default function ReviewerCompetence(props) {
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const [dataReport, setDataReport] = React.useState({});
+  const [newReport, setNewReport] = React.useState(false);
+  let itemsCompetence =
+    [{
+      id: 'DL',
+      value: {
+        grade: '',
+        comment: ''
+      }
+    }, {
+
+      id: 'CF',
+      value: {
+        grade: '',
+        comment: ''
+      }
+    }, {
+
+      id: 'SP',
+      value: {
+        grade: '',
+        comment: ''
+      }
+    }, {
+
+      id: 'CA',
+      value: {
+        grade: '',
+        comment: ''
+      }
+    }, {
+
+      id: 'EP',
+      value: {
+        grade: '',
+        comment: ''
+      },
+    }];
+
+  let dataReportFilled = {
+    "essay_id": props.data.id,
+    "reviewer_id": parseInt(localStorage.getItem("profileId")),
+    "grade_1": "",
+    "grade_1_opinion": "",
+    "grade_2": "",
+    "grade_2_opinion": "",
+    "grade_3": "",
+    "grade_3_opinion": "",
+    "grade_4": "",
+    "grade_4_opinion": "",
+    "grade_5": "",
+    "grade_5_opinion": "",
+  }
+
+
+  const getItemCompetenceVelue = (value) => {
+    const itemIndex = itemsCompetence.findIndex(item => item.id == value.valueId);
+    if (itemIndex > -1) {
+      itemsCompetence[itemIndex].value.grade = ""+parseInt(value.grade)*40;
+      itemsCompetence[itemIndex].value.comment = value.comment;
+      dataReportFilled[`grade_${itemIndex+1}`] = ""+parseInt(value.grade)*40;
+      dataReportFilled[`grade_${itemIndex+1}_opinion`] = value.comment;
+      
+    }
+  }
+
+  const handleButtonSend = () => {
+    setDataReport(dataReportFilled);
+    console.log(dataReportFilled);
+    axios.post("http://localhost:5000" + "/report/create", dataReportFilled).then(
+      (response) => {
+        setErrorMsg(response.data.message);
+      }
+    ).catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        setErrorMsg(error.response.data.message);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
+    });
   };
 
-  const handleButtonClickCF = (value) => {
-    setCF(value);
-  };
-
-  const handleButtonClickSP = (value) => {
-    setSP(value);
-  };
-
-  const handleButtonClickCA = (value) => {
-    setCA(value);
-  };
-
-  const handleButtonClickEP = (value) => {
-    setEP(value);
-  };
-
-  let Total = (DL + CF + SP + CA + EP) * 40;
+  //let Total = (DL + CF + SP + CA + EP) * 40;
 
   return (
-    <Accordion allowToggle minW="416px" maxW="436px" boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.26)">
-    <Flex borderTopRightRadius="16px" borderTopLeftRadius="16px" minH="65px" alignItems="left">
-      <Box my="16.5px" pl="24px" textColor="neutralDark.4" textStyle="Subtitle1">Competências</Box>
-      <Spacer />
+    <Flex boxShadow="0px 1px 6px 1px rgba(28, 31, 36, 0.26)"
+      mr="47px"
+      height="fit-content"
+      borderTopLeftRadius="16px"
+      borderTopRightRadius="16px"
+    >
+      <Accordion allowToggle minW="416px" maxW="436px" boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.26)">
+        <Flex
+          borderTopRightRadius="16px"
+          borderTopLeftRadius="16px"
+          bg="neutralLight.2"
+          minH="65px"
+          align="center"
+          display="flex"
+          justifyContent="space-between"
+
+
+        >
+          <Box
+            my="16.5px"
+            pl="24px"
+            textColor="neutralDark.4"
+            textStyle="Subtitle1"
+
+          >
+            Competências
+          </Box>
+          <Button variant="secondary" onClick={handleButtonSend}>Próxima Redação</Button>
+
+        </Flex>
+
+        <AccordionItemCompetenceReviewer
+          competence_title=" 1 - Dominar linguagens (DL)"
+          description="O participante deve ser capaz de utilizar a língua portuguesa formal de maneira correta e adequada na modalidade escrita." onMessage={getItemCompetenceVelue} value_id='DL' />
+
+        <AccordionItemCompetenceReviewer
+          competence_title="  2 - Compreender fenômenos (CF)"
+          description="  O participante deve ser capaz de compreender a proposta de redação e utilizar conhecimentos de diversas áreas para desenvolver o tema proposto, dentro das normas estruturais do texto dissertativo-argumentativo em prosa." onMessage={getItemCompetenceVelue} value_id='CF' />
+
+        <AccordionItemCompetenceReviewer
+          competence_title=" 3 - Enfrentar situações-problema (SP)"
+          description="   O participante deve ser capaz de selecionar, relacionar, organizar e interpretar informações, fatos, opiniões e argumentos." onMessage={getItemCompetenceVelue} value_id='SP' />
+
+        <AccordionItemCompetenceReviewer
+          competence_title="4 - Construir argumentação (CA)"
+          description="O participante deve ser capaz de demonstrar conhecimento dos recursos linguísticos necessários para construir uma argumentação eficaz." onMessage={getItemCompetenceVelue} value_id='CA' />
+
+        <AccordionItemCompetenceReviewer
+          competence_title="5 - Elaborar propostas (EP)"
+          description="O participante deve ser capaz de elaborar uma proposta de intervenção para o problema abordado, respeitando os direitos humanos." onMessage={getItemCompetenceVelue} value_id='EP' />
+      </Accordion>
     </Flex>
-    <AccordionItem bg="neutralLight.0">
-      <h2>
-        <AccordionButton _focus="null">
-          <Box textColor="neutralDark.4" textStyle="Body1" as="span" flex='1' textAlign='left'>
-            1 - Dominar linguagens (DL)
-          </Box>
-          <AccordionIcon color="neutralDark.0" boxSize="24px"/>
-        </AccordionButton>
-      </h2>
-      <AccordionPanel pb={4}>
-        <Box textStyle="Caption" textColor="neutralDark.0" maxW="400px" textAlign="left">
-          <Text>
-          O participante deve ser capaz de utilizar a língua
-          </Text>
-          <Text>
-          portuguesa formal de maneira correta e adequada na
-          </Text>
-          <Text>
-          modalidade escrita.
-          </Text>
-        </Box>
-        <Box>
-            <FormControl isRequired mt="24px" as='fieldset'>
-              <ButtonGroup>
-                <HStack spacing='8px'>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={DL === 1 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickDL(1)}
-                  value='1'
-                  >
-                    1
-                  </Button>
-                  <Button minW="71px" 
-                  _focus="null"
-                  variant={DL === 2 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickDL(2)}
-                  value='2'
-                  >
-                    2
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={DL === 3 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickDL(3)}
-                  value='3'
-                  >
-                    3
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={DL === 4 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickDL(4)}
-                  value='4'
-                  >
-                    4
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={DL === 5 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickDL(5)}
-                  value='5'
-                  >
-                    5
-                  </Button>
-                </HStack>
-              </ButtonGroup>
-            </FormControl>
-            <FormControl isRequired mt="24px"> 
-              <Textarea
-                minH="120px"
-                maxH="120px"
-                textColor="neutralDark.3"
-                placeholder="Escreva um  breve comentário."
-                _placeholder={{ textStyle: 'Body' }}
-                name="Description"
-              />
-            </FormControl>
-        </Box>
-      </AccordionPanel>
-    </AccordionItem>
-  
-    <AccordionItem bg="neutralLight.0">
-      <h2>
-        <AccordionButton _focus="null">
-          <Box textColor="neutralDark.4" textStyle="Body1" as="span" flex='1' textAlign='left'>
-            2 - Compreender fenômenos (CF)
-          </Box>
-          <AccordionIcon color="neutralDark.0" boxSize="24px"/>
-        </AccordionButton>
-      </h2>
-      <AccordionPanel pb={4}>
-        <Box textStyle="Caption" textColor="neutralDark.0" maxW="400px" textAlign="left">
-          <Text>
-            O participante deve ser capaz de compreender a proposta
-          </Text>
-          <Text>
-            de redação e utilizar conhecimentos de diversas áreas
-          </Text>
-          <Text>
-            para desenvolver o tema proposto, dentro das normas
-          </Text>
-          <Text>
-            estruturais do texto dissertativo-argumentativo em prosa.
-          </Text>
-        </Box>
-        <Box>
-            <FormControl isRequired mt="24px" as='fieldset'>
-              <ButtonGroup>
-                <HStack spacing='8px'>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CF === 1 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCF(1)}
-                  value='1'
-                  >
-                    1
-                  </Button>
-                  <Button minW="71px" 
-                  _focus="null"
-                  variant={CF === 2 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCF(2)}
-                  value='2'
-                  >
-                    2
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CF === 3 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCF(3)}
-                  value='3'
-                  >
-                    3
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CF === 4 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCF(4)}
-                  value='4'
-                  >
-                    4
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CF === 5 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCF(5)}
-                  value='5'
-                  >
-                    5
-                  </Button>
-                </HStack>
-              </ButtonGroup>
-            </FormControl>
-            <FormControl isRequired mt="24px"> 
-              <Textarea
-                minH="120px"
-                maxH="120px"
-                textColor="neutralDark.3"
-                placeholder="Escreva um  breve comentário."
-                _placeholder={{ textStyle: 'Body' }}
-                name="Description"
-              />
-            </FormControl>
-        </Box>
-      </AccordionPanel>
-    </AccordionItem>
-
-    <AccordionItem bg="neutralLight.0">
-      <h2>
-        <AccordionButton _focus="null">
-          <Box textColor="neutralDark.4" textStyle="Body1" as="span" flex='1' textAlign='left'>
-            3 - Enfrentar situações-problema (SP)
-          </Box>
-          <AccordionIcon color="neutralDark.0" boxSize="24px"/>
-        </AccordionButton>
-      </h2>
-      <AccordionPanel pb={4}>
-        <Box textStyle="Caption" textColor="neutralDark.0" maxW="400px" textAlign="left">
-          <Text>
-            O participante deve ser capaz de selecionar, relacionar,
-          </Text>
-          <Text>
-            organizar e interpretar informações, fatos, opiniões e
-          </Text>
-          <Text>
-            argumentos.
-          </Text>
-        </Box>
-        <Box>
-            <FormControl isRequired mt="24px" as='fieldset'>
-              <ButtonGroup>
-                <HStack spacing='8px'>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={SP === 1 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickSP(1)}
-                  value='1'
-                  >
-                    1
-                  </Button>
-                  <Button minW="71px" 
-                  _focus="null"
-                  variant={SP === 2 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickSP(2)}
-                  value='2'
-                  >
-                    2
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={SP === 3 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickSP(3)}
-                  value='3'
-                  >
-                    3
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={SP === 4 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickSP(4)}
-                  value='4'
-                  >
-                    4
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={SP === 5 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickSP(5)}
-                  value='5'
-                  >
-                    5
-                  </Button>
-                </HStack>
-              </ButtonGroup>
-            </FormControl>
-            <FormControl isRequired mt="24px"> 
-              <Textarea
-                minH="120px"
-                maxH="120px"
-                textColor="neutralDark.3"
-                placeholder="Escreva um  breve comentário."
-                _placeholder={{ textStyle: 'Body' }}
-                name="Description"
-              />
-            </FormControl>
-        </Box>
-      </AccordionPanel>
-    </AccordionItem>
-
-    <AccordionItem bg="neutralLight.0">
-      <h2>
-        <AccordionButton _focus="null">
-          <Box textColor="neutralDark.4" textStyle="Body1" as="span" flex='1' textAlign='left'>
-            4 - Construir argumentação (CA)
-          </Box>
-          <AccordionIcon color="neutralDark.0" boxSize="24px"/>
-        </AccordionButton>
-      </h2>
-      <AccordionPanel pb={4}>
-        <Box textStyle="Caption" textColor="neutralDark.0" maxW="400px" textAlign="left">
-          <Text>
-            O participante deve ser capaz de demonstrar
-          </Text>
-          <Text>
-            conhecimento dos recursos linguísticos necessários para
-          </Text>
-          <Text>
-            construir uma argumentação eficaz.
-          </Text>
-        </Box>
-        <Box>
-            <FormControl isRequired mt="24px" as='fieldset'>
-              <ButtonGroup>
-                <HStack spacing='8px'>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CA === 1 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCA(1)}
-                  value='1'
-                  >
-                    1
-                  </Button>
-                  <Button minW="71px" 
-                  _focus="null"
-                  variant={CA === 2 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCA(2)}
-                  value='2'
-                  >
-                    2
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CA === 3 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCA(3)}
-                  value='3'
-                  >
-                    3
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CA === 4 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCA(4)}
-                  value='4'
-                  >
-                    4
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={CA === 5 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickCA(5)}
-                  value='5'
-                  >
-                    5
-                  </Button>
-                </HStack>
-              </ButtonGroup>
-            </FormControl>
-            <FormControl isRequired mt="24px"> 
-              <Textarea
-                minH="120px"
-                maxH="120px"
-                textColor="neutralDark.3"
-                placeholder="Escreva um  breve comentário."
-                _placeholder={{ textStyle: 'Body' }}
-                name="Description"
-              />
-            </FormControl>
-        </Box>
-      </AccordionPanel>
-    </AccordionItem>
-
-    <AccordionItem bg="neutralLight.0">
-      <h2>
-        <AccordionButton _focus="null">
-          <Box textColor="neutralDark.4" textStyle="Body1" as="span" flex='1' textAlign='left'>
-            5 - Elaborar propostas (EP)
-          </Box>
-          <AccordionIcon color="neutralDark.0" boxSize="24px"/>
-        </AccordionButton>
-      </h2>
-      <AccordionPanel pb={4}>
-        <Box textStyle="Caption" textColor="neutralDark.0" maxW="400px" textAlign="left">
-          <Text>
-            O participante deve ser capaz de elaborar uma proposta
-          </Text>
-          <Text>
-            de intervenção para o problema abordado, respeitando os
-          </Text>
-          <Text>
-            direitos humanos.
-          </Text>
-        </Box>
-        <Box>
-            <FormControl isRequired mt="24px" as='fieldset'>
-              <ButtonGroup>
-                <HStack spacing='8px'>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={EP === 1 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickEP(1)}
-                  value='1'
-                  >
-                    1
-                  </Button>
-                  <Button minW="71px" 
-                  _focus="null"
-                  variant={EP === 2 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickEP(2)}
-                  value='2'
-                  >
-                    2
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={EP === 3 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickEP(3)}
-                  value='3'
-                  >
-                    3
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={EP === 4 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickEP(4)}
-                  value='4'
-                  >
-                    4
-                  </Button>
-                  <Button minW="71px"
-                  _focus="null"
-                  variant={EP === 5 ? "primary" : "offWihtTextColor"}
-                  onClick={() => handleButtonClickEP(5)}
-                  value='5'
-                  >
-                    5
-                  </Button>
-                </HStack>
-              </ButtonGroup>
-            </FormControl>
-            <FormControl isRequired mt="24px"> 
-              <Textarea
-                minH="120px"
-                maxH="120px"
-                textColor="neutralDark.3"
-                placeholder="Escreva um  breve comentário."
-                _placeholder={{ textStyle: 'Body' }}
-                name="Description"
-              />
-            </FormControl>
-        </Box>
-      </AccordionPanel>
-    </AccordionItem >
-  </Accordion>
   );
 };

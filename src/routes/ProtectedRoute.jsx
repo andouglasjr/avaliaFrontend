@@ -11,7 +11,7 @@ export const ProtectedRoute = () => {
     
     return (
     <div>
-    <Sidebar />
+    <Sidebar userName={localStorage.getItem("userName")} />
     <Outlet />
     </div>
     );

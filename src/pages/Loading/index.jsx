@@ -29,7 +29,12 @@ function EssayGenerationLoading() {
 
   if (!state.isWelcomeLoading) {
     setTimeout(() => {
-      navigate("/generationScreen")
+      if(localStorage.getItem("profile") === "reviewer"){
+        navigate("/evaluationScreen")
+      }else{
+        navigate("/generationScreen")
+      }
+      
     }, 3200)
   }
 
