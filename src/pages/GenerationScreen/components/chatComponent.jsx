@@ -1,41 +1,10 @@
 import React from "react";
-import { Flex, Spacer, Text, Image } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { RecoilRoot } from 'recoil';
 
 import TextBoxComponent from "./textBoxComponent.jsx";
-
-/*
-<Flex
-          ml="213px"
-          mt="130px"
-          w="680px"
-          h="436px"
-          bg="transparent"
-          flexDirection="column"
-        >
-          <InputGroup mt="30px" w="680px" h="48px">
-            <Input
-              boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.16)"
-              w="full"
-              h="full"
-              textStyle="Caption"
-              textColor="neutralDark.4"
-              _placeholder={{ color: "neutralLight.4" }}
-              placeholder="Placeholder"
-              onChange={ handleInputChange }
-            />
-            <InputRightElement minH="full">
-              <IconButton
-                bg="neutralLight.1"
-                minH="full"
-                my="auto"
-                icon={<SendIcon boxSize="24px" color="neutralDark.0" />}
-                onClick={ handleInputButtonClick }
-              />
-            </InputRightElement>
-          </InputGroup>
-        </Flex>
-*/
+import InteractComponent from "./interactComponent.jsx";
 
 function chatComponent(props) {
   const { ml, mr, mt, mb, text, ...rest } = props;
@@ -52,15 +21,17 @@ function chatComponent(props) {
         w="calc(100vh + 100vh)"
       >
         <Flex
-          bg="green"
+          bg="transparent"
           overflowY="auto"
           overflowX="hidden"
           minW="680px"
-          maxH="675px"
+          maxH="89%"
           ml="223px"
           flexDirection="column"
         >
-          <TextBoxComponent />
+          <RecoilRoot>
+            <InteractComponent />
+          </RecoilRoot>
         </Flex>
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}

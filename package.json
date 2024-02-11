@@ -26,6 +26,7 @@
     "react-custom-scrollbars-2": "^4.5.0",
     "react-icons": "^4.11.0",
     "react-router-dom": "^6.16.0",
+    "recoil": "^0.7.7",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {

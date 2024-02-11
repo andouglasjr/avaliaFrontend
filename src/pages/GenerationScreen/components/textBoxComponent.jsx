@@ -15,6 +15,8 @@ import { SendIcon } from "../../../components/icons/Icons";
 
 import axios from "axios";
 
+import { steps } from "../../../chatbot/conversation.json";
+
 import avatar from "./images/Avatar.png";
 import essayGenerateOptionImage from "./images/generateEssay.png";
 import essayWriterOptionImage from "./images/writeEssay.png";
@@ -67,8 +69,8 @@ const WriterEssay = function writerEssayOption(props) {
           writerEssay == true
             ? "default"
             : "pointer" && essayGenerate == true
-            ? "default"
-            : "pointer"
+              ? "default"
+              : "pointer"
         }
         onClick={onClick}
         mt="16px"
@@ -76,8 +78,8 @@ const WriterEssay = function writerEssayOption(props) {
           essayGenerate == true
             ? "-314px"
             : "0px" || writerEssay == true
-            ? "16px"
-            : "0px"
+              ? "16px"
+              : "0px"
         }
         justify="left"
         minW="314px"
@@ -107,8 +109,8 @@ const WriterEssay = function writerEssayOption(props) {
             writerEssay == true
               ? "default"
               : "pointer" && essayGenerate == true
-              ? "default"
-              : "pointer"
+                ? "default"
+                : "pointer"
           }
           ml="16px"
           mb="12px"
@@ -432,8 +434,8 @@ const NewTheme = function newThemeClickedOption(props) {
                     generateEssay
                       ? null
                       : handleWriterEssayWithTheme() &&
-                        setThemeOption(tgo.text) &&
-                        setValue(true)
+                      setThemeOption(tgo.text) &&
+                      setValue(true)
                   }
                   borderRadius="8px"
                   mb="8px"
@@ -532,8 +534,8 @@ const EssayGenerate = function essayGenerateOption(props) {
           writerEssay == true
             ? "default"
             : "pointer" && essayGenerate == true
-            ? "default"
-            : "pointer"
+              ? "default"
+              : "pointer"
         }
         onClick={onClick}
         mt="16px"
@@ -561,8 +563,8 @@ const EssayGenerate = function essayGenerateOption(props) {
             writerEssay == true
               ? "default"
               : "pointer" && essayGenerate == true
-              ? "default"
-              : "pointer"
+                ? "default"
+                : "pointer"
           }
           ml="16px"
           mb="12px"
@@ -1034,8 +1036,8 @@ const GenerateEssayClicked = function generateEssayOpitionClicked(props) {
               borderRadius="8px"
               onClick={
                 userTheme == true ||
-                allGenerate == true ||
-                generateToUser == true
+                  allGenerate == true ||
+                  generateToUser == true
                   ? null
                   : handleClickAllGenerate
               }
@@ -1043,10 +1045,10 @@ const GenerateEssayClicked = function generateEssayOpitionClicked(props) {
                 userTheme == true
                   ? "default"
                   : "pointer" && allGenerate == true
-                  ? "default"
-                  : "pointer" && generateToUser == true
-                  ? "default"
-                  : "pointer"
+                    ? "default"
+                    : "pointer" && generateToUser == true
+                      ? "default"
+                      : "pointer"
               }
               minW="644px"
               maxW="644px"
@@ -1063,8 +1065,8 @@ const GenerateEssayClicked = function generateEssayOpitionClicked(props) {
               borderRadius="8px"
               onClick={
                 userTheme == true ||
-                allGenerate == true ||
-                generateToUser == true
+                  allGenerate == true ||
+                  generateToUser == true
                   ? null
                   : handleClickUserTheme
               }
@@ -1072,10 +1074,10 @@ const GenerateEssayClicked = function generateEssayOpitionClicked(props) {
                 userTheme == true
                   ? "default"
                   : "pointer" && allGenerate == true
-                  ? "default"
-                  : "pointer" && generateToUser == true
-                  ? "default"
-                  : "pointer"
+                    ? "default"
+                    : "pointer" && generateToUser == true
+                      ? "default"
+                      : "pointer"
               }
               minW="644px"
               maxW="644px"
@@ -1090,8 +1092,8 @@ const GenerateEssayClicked = function generateEssayOpitionClicked(props) {
             <Flex
               onClick={
                 userTheme == true ||
-                allGenerate == true ||
-                generateToUser == true
+                  allGenerate == true ||
+                  generateToUser == true
                   ? null
                   : handleClickGenerateToUser
               }
@@ -1101,10 +1103,10 @@ const GenerateEssayClicked = function generateEssayOpitionClicked(props) {
                 userTheme == true
                   ? "default"
                   : "pointer" && allGenerate == true
-                  ? "default"
-                  : "pointer" && generateToUser == true
-                  ? "default"
-                  : "pointer"
+                    ? "default"
+                    : "pointer" && generateToUser == true
+                      ? "default"
+                      : "pointer"
               }
               minW="644px"
               maxW="644px"
@@ -1136,13 +1138,32 @@ function textBoxComponent(props) {
   const [essayGenerate, setEssayGenerate] = useState(false);
   const [writerEssay, setWriterEssay] = useState(false);
 
+  const [id, setId] = useState("2");
+  const [type, setType] = useState(null);
+  const [text, setText] = useState(null);
+  const [options, setOptions] = useState(null);
+
+  useEffect(() => {
+    const verifiedId = steps.filter(item => item.id == id);
+
+    if (verifiedId.length > 0) {
+      const matchingItem = verifiedId[0];
+
+      setType(matchingItem.response_type);
+      setText(matchingItem.message);
+      setOptions(matchingItem.options);
+      console.log(type)
+      console.log(text)
+      console.log(options)
+    }
+  }, [id, steps, type, text, options]);
+
   const handleClickEssayGenerate = () => {
     setEssayGenerate(true);
     setWriterEssay(false);
   };
 
   const handleClickWriterEssay = () => {
-    console.log("Entrou");
     setEssayGenerate(false);
     setWriterEssay(true);
   };

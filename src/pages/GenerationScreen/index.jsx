@@ -69,7 +69,7 @@ function generationScreen() {
 
   return (
     <div>
-      <Flex h="calc(100% + 30vh)" w="calc(100vh + 100vh)" bg="neutralLight.1">
+      <Flex h="calc(100% + 30vh)" w="calc(100vh + 100vh)" bg="neutralLight.2">
         <Flex w="240px" h="100%" bg="neutralLight.1" />
         <Lia ml="240px"/>
       </Flex>
