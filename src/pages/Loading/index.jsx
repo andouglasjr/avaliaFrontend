@@ -31,7 +31,7 @@ function EssayGenerationLoading() {
   if (state1.isWelcomeLoading) {
     setTimeout(() => {
       if (localStorage.getItem("profile") === "reviewer") {
-        navigate("/evaluationScreen")
+        navigate("/reviewerDashboard")
       } else {
         navigate("/generationScreen")
       }
@@ -54,7 +54,7 @@ function EssayGenerationLoading() {
   }
 
   useEffect(() => {
-    if (state1.id != null || state1.id != 0 || state1.id != "") {
+    if (!state1.isWelcomeLoading) {
       const fetchData = async () => {
         axios
           .get("http://localhost:5000" + "/essay/correct/" + state1.id)
@@ -74,7 +74,7 @@ function EssayGenerationLoading() {
       };
       fetchData();
     }
-  }, []);
+  }, [state1]);
 
   return (
 
