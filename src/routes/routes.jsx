@@ -11,6 +11,7 @@ import Sign_up from "../pages/auth/register/index";
 import EssayGenerationLoading from "../pages/Loading";
 import GenerationScreen from "../pages/GenerationScreen/index";
 import axios from "axios";
+import ReviewerDashboard from "../pages/ReviewerDashboard";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -38,6 +39,10 @@ const Routes = () => {
         {
           path: "/generationScreen",
           element: <GenerationScreen />,
+        },
+        {
+          path: "/reviewerDashboard",
+          element: <ReviewerDashboard />,
         },
         {
           path: "/userMain",

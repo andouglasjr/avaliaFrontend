@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 
 function Sidebar(props) {
   const { ml, mr, mt, mb, zIndex, ...rest } = props;
+  console.log(props)
 
   const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ function Sidebar(props) {
         <Flex w="240px" h="68px" bg="transparent">
           <Brand />
         </Flex>
-        <Flex direction="column" mt="1px" w="240px" h="628px" bg="transparent">
+        <Flex direction="column" mt="1px" w="240px" h="95vh" bg="transparent">
           <CustomButton
             variant="secondary"
             onClick={handleClickTheme}
@@ -52,12 +53,12 @@ function Sidebar(props) {
             w="216px"
             label="Nova Redação"
           />
-          <List mx="auto" />
+          
         </Flex>
         <Flex ml="12px" w="216px" h="1px" bg="neutralLight.1" />
-        <Flex w="240px" h="calc(100vh - 696px)" bg="transparent">
+        <Flex w="240px" h="5vh" bg="transparent">
           <PerfilInteract
-            label="Romero Brito"
+            label={props.userName}
             mx="auto"
             my="auto"
           />

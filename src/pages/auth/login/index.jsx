@@ -37,16 +37,24 @@ function Login() {
   //PassCorfimed
   const [pathLogin, setPathLogin] = React.useState(false);
   const navigate = useNavigate();
-  const { setToken } = useAuth();
+  const { setToken, setUserName, setEmail, setProfile, setProfileId } = useAuth();
   const [accessToken, setAccessToken] = useState('');
+  const [accessUserName, setAccessUserName] = useState('');
+  const [accessEmail, setAccessEmail] = useState('');
+  const [accessProfile, setAccessProfile] = useState('');
+  const [accessProfileId, setAccessProfileId] = useState('');
+
   //const [tokenExpiration, setTokenExpiration] = useState(null);
 
   if (pathLogin == true) {
     setPathLogin(false)
-    
     const handleLogin = () => {
       setToken(accessToken);
-      navigate("/generationScreen", { replace: true });
+      setUserName(accessUserName);
+      setEmail(accessEmail);
+      setProfile(accessProfile)
+      setProfileId(accessProfileId)
+      navigate("/loading", { isWelcomeLoading: true });
     };
   
     setTimeout(() => {
@@ -83,6 +91,10 @@ function Login() {
           setErrorMsg(response.data.message);
           setPathLogin(true)
           setAccessToken(response.data.data.accessToken);
+          setAccessUserName(response.data.data.name);
+          setAccessEmail(response.data.data.email);
+          setAccessProfile(response.data.data.profile);
+          setAccessProfileId(response.data.data.id)
 
           //const expires_in = response.data.data
           //const expirationTime = Date.now() + expires_in * 1000;
@@ -227,6 +239,7 @@ function Login() {
             flexDirection="column"
             fontFamily="manrope"      
           >
+            <NavLink to="/loading" state={{isWelcomeLoading: true}}></NavLink>
             <Button
               fontSize="sm"
               variant="primary"
@@ -237,6 +250,7 @@ function Login() {
               onClick={() => {
                 setLogin(true);
               }}
+
               >
               Entrar
             </Button>
