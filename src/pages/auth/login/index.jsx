@@ -43,6 +43,7 @@ function Login() {
   const [accessEmail, setAccessEmail] = useState('');
   const [accessProfile, setAccessProfile] = useState('');
   const [accessProfileId, setAccessProfileId] = useState('');
+  const data = {isWelcomeLoading: true}
 
   //const [tokenExpiration, setTokenExpiration] = useState(null);
 
@@ -54,7 +55,7 @@ function Login() {
       setEmail(accessEmail);
       setProfile(accessProfile)
       setProfileId(accessProfileId)
-      navigate("/loading", { isWelcomeLoading: true });
+      navigate("/loading", { state: data });
     };
   
     setTimeout(() => {

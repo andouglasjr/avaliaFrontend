@@ -15,9 +15,10 @@ import { CustomButton } from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+//import { setAllChat, setIDState } from "../../pages/GenerationScreen/components/interactComponent";
+
 function Sidebar(props) {
-  const { ml, mr, mt, mb, zIndex, ...rest } = props;
-  console.log(props)
+  const { ml, mr, mt, mb, zIndex, display, ...rest } = props;
 
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ function Sidebar(props) {
       transition={{ type: "spring", bounce: 0.25 }}
     >
       <Flex
+        display={display}
         zIndex={100}
         position="fixed"
         direction="column"

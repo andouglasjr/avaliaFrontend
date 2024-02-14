@@ -9,10 +9,12 @@ import { IconLoadingPage } from "../../components/icons/Icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import axios from "axios";
+
 function EssayGenerationLoading() {
 
   const location = useLocation();
-  const state = { location };
+  const state1 = location.state;
   const navigate = useNavigate();
   const neutralLight1 = useColorModeValue("neutralLight.1", "neutralLight.1")
   const neutralDark4 = useColorModeValue("neutralDark.4", "neutralDark.4")
@@ -24,19 +26,55 @@ function EssayGenerationLoading() {
     setTimeout(() => {
       setFlagChangeText(true)
     }, 1600)
-
   }, []);
 
-  if (!state.isWelcomeLoading) {
+  if (state1.isWelcomeLoading) {
     setTimeout(() => {
-      if(localStorage.getItem("profile") === "reviewer"){
+      if (localStorage.getItem("profile") === "reviewer") {
         navigate("/evaluationScreen")
-      }else{
+      } else {
         navigate("/generationScreen")
       }
-      
     }, 3200)
   }
+
+  const studentEssayCorrect = (response) => {
+    if (!state1.isWelcomeLoading) {
+      const data = {
+        id: response,
+      }
+
+      console.log(response)
+      console.log(data)
+
+      setTimeout(() => {
+        navigate("/evaluationScreen", { state: data });
+      }, 3200);
+    }
+  }
+
+  useEffect(() => {
+    if (state1.id != null || state1.id != 0 || state1.id != "") {
+      const fetchData = async () => {
+        axios
+          .get("http://localhost:5000" + "/essay/correct/" + state1.id)
+          .then((response) => {
+            studentEssayCorrect(response.data.data.essay_id);
+          })
+          .catch(function (error) {
+            if (error.response) {
+              console.log(error.response.data.message);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log("Error", error.message);
+            }
+            console.log(error.config);
+          }, []);
+      };
+      fetchData();
+    }
+  }, []);
 
   return (
 
@@ -48,8 +86,7 @@ function EssayGenerationLoading() {
       justifyContent="center"
       backgroundColor={neutralLight1}
     >
-
-      {state.isWelcomeLoading || null ? (
+      {!state1.isWelcomeLoading || null ? (
         <Flex
           alignItems="center"
           flexDirection="column"
@@ -67,7 +104,7 @@ function EssayGenerationLoading() {
             fontWeight="600"
             fontFamily="Manrope"
           >
-            Gerando redação com tema proposto...
+            Corrigindo redação...
           </Text>
 
         </Flex>
