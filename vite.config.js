@@ -11,11 +11,15 @@ export default defineConfig({
     'process.env': process.env
   },
   plugins: [react()],
-  esbuild:{
-    loader: {
-      '.js': '.jsx',
-    }
+  esbuild: {
+    loader:
+      'jsx',
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',
+      },
+    },
   }
-
-
-})
+});
