@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Text } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
 import EssayData from "../../components/essayData/EssayData";
 import Essay from "../../components/essay/Essay";
 import StudentCompetence from "../../components/competences/StudentCompetence";
@@ -11,17 +12,18 @@ function EvaluationScreen(props) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const state = location.state;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let response;
         if(localStorage.getItem("profile") === "student"){
-          response = await axios.get("http://localhost:5000/generic/get/evaluationScreenData/1");
+          response = await axios.get("http://localhost:5000/generic/get/evaluationScreenData/" + state.id );
         }else{
           response = await axios.get("http://localhost:5000/generic/get/evaluationScreen/review");
         }
-        console.log(response.data.data)
         setData(response.data.data);
         setIsLoading(false);
       } catch (error) {
@@ -34,7 +36,6 @@ function EvaluationScreen(props) {
 
   if (isLoading) return <div style={{ marginLeft: "500px" }}>Carregando...</div>;
   if (error) return <div style={{ marginLeft: "500px" }}>Error: {error.message}</div>;
-
 
   return (
     <div>

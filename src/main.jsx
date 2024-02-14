@@ -9,9 +9,9 @@ import theme from "./theme/theme"
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <React.Fragment>
     <ChakraProvider theme={theme}>
-        <App />
+      <App />
     </ChakraProvider>
-  </React.StrictMode>
+  </React.Fragment>
 );

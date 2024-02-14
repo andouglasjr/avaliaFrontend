@@ -1,6 +1,7 @@
 import { Flex, Text, Textarea, Button } from '@chakra-ui/react';
 import { PencilIcon } from '../icons/Icons';
-import essaySvg from '../../assets/img/essay/essay_svg2.svg';
+import essaySvg from '../../assets/img/essay/essay_svg.svg';
+import Modal from '../modal/Modal';
 import React, { useState, useRef } from 'react';
 import { Correct } from '../icons/Icons';
 import Comment from '../comment/comment';
@@ -11,8 +12,9 @@ export default function Essay(props) {
   let essayData = props.essayData != undefined ? props.essayData : essayDefault;
 
   const [originalTextareaValue, setOriginalTextareaValue] = useState(essayData);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [textareaValue, setTextareaValue] = useState(originalTextareaValue);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(props.isEditingValue == null ? false : true);
   const textareaRef = useRef(null);
 
   const handleEditClick = () => {
@@ -26,38 +28,37 @@ export default function Essay(props) {
   };
 
   const handleSaveClick = () => {
-    setIsEditing(false);
-    setOriginalTextareaValue(textareaValue)
+    if (textareaValue.length < 300) {
+      console.log("Sua Redação está em Branco, escreva algo antes de enviar!")
+    } else {
+      setIsEditing(false);
+      props.setFormData({text: textareaValue, subject_id: props.subject_id});
+      setOriginalTextareaValue(textareaValue);
+      props.setPermission(true)
+      setIsDisabled(true)
+    }
   };
 
   const handleTextareaChange = (event) => {
     setTextareaValue(event.target.value);
+    if(textareaValue.length < 300){
+      setIsDisabled(false)
+    }
   };
 
   return (
     <Flex
-      mb="32px"
+      mb="10px"
       flexDir="column"
       alignItems="flex-start"
       backgroundColor="neutralLight.0"
-      border="1px"
       borderRadius="16px"
       boxShadow="0px 4px 6px 0px rgba(28, 31, 36, 0.16)"
-      borderColor="neutralLight.2"
-
-      height="100%"
+      mt={props.mt}
       zIndex={0}
+      maxW="592px"
     >
-      <Flex
-        width="100%"
-        height="65px"
-        padding="16.5px 24px"
-        borderBottom="1px solid"
-        borderColor="neutralLight.2"
-        justifyContent="end"
-        alignItems="center"
-      >
-        <Text textStyle="Subtitle1">{props.essayName}</Text>
+      <Flex>
         {!props.Admin ? ("") : (
           isEditing ? (
             <Flex alignItems="flex-start" gap="16px">
@@ -71,40 +72,43 @@ export default function Essay(props) {
         )}
 
       </Flex>
-
-      <Textarea
-        _focus="none"
-        rows="30"
-        readOnly={!isEditing || props.isAdmin}
-        maxLength="1770"
-        overflow="hidden"
-        lineHeight="2.437"
-        padding="34px 42px 40px 57px"
-        backgroundImage={`url(${essaySvg})`}
-        flexGrow="1"
-        border="none"
-        resize="none"
-        backgroundRepeat="no-repeat"
-        backgroundSize="cover"
-        value={textareaValue}
-        onChange={handleTextareaChange}
-        ref={textareaRef}
-        textStyle="Caption"
-      />
-      {props.isAdmin ? (
-        <Flex display="flex" justifyContent="space-between" align="center" w="100%" gap="16px" padding="16.5px 24px">
-
-          <Flex align="center">
-            <div>
-              <Correct color="neutralDark.0"></Correct>
-              <Text textAlign="center" textStyle="Caption" ml="6px" textColor="neutralDark.0">Racunho Salvo</Text>
-            </div>
-          </Flex>
-
-          <Button onClick={handleSaveClick} variant="primary">Enviar</Button>
-        </Flex>) : ("")}
-
-
+      <div style={{
+        margin: '32px 32px 0px 32px',
+        borderRadius: "16px",
+      }}>
+        <Flex minW="528px">
+          <Textarea
+            backgroundImage={`url(${essaySvg})`}
+            backgroundRepeat="no-repeat"
+            backgroundSize='cover'
+            borderRadius="16px"
+            rows="30"
+            readOnly={!isEditing || props.isAdmin}
+            overflow="hidden"
+            resize="none"
+            value={textareaValue}
+            onChange={handleTextareaChange}
+            ref={textareaRef}
+            textStyle="Body"
+            style={{ lineHeight: '36px' }}
+            _placeholder={{ color: "neutralLight.4" }}
+            placeholder="Digite seu texto aqui..."
+          />
+        </Flex>
+      </div>
+      <Flex display="flex" justifyContent="space-between" align="center" w="100%" padding="16.5px 24px">
+        <Flex align="center">
+          <div>
+            <Flex display={props.permission ? "block" : "none"}>
+              <Flex flexDirection="row" align="center">
+                <Correct boxSize="20px" color="#637792"></Correct>
+                <Text textAlign="center" textStyle="Caption" ml="6px" textColor="#637792">Racunho Salvo</Text>
+              </Flex>
+            </Flex>
+          </div>
+        </Flex>
+        <Modal isDisabled={isDisabled} handleSaveClick={handleSaveClick} textPrimary="Quer enviar a redação?" textOpenButton="Enviar" textButtonFunction="Enviar" />
+      </Flex>
     </Flex >
   );
 }
