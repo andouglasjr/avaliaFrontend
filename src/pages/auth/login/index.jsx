@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState,} from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { useAuth } from "./authToken";
@@ -15,15 +15,14 @@ import {
   InputRightElement,
   Text,
   useColorModeValue,
-  useToast
 } from "@chakra-ui/react";
 // Assets
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
+import { OpenEyeIcon } from "../../../components/icons/Icons";
+import { ClosedEyeIcon } from "../../../components/icons/Icons";
 import axios from "axios";
 
-import Toast from "../../../components/toast/ToastFunctions";
 import loginValidations from "./validations/loginValidations";
+import LoginImage from "./loginImage.svg";
 import { BrandIconBlue } from "../../../components/icons/Icons";
 
 import { useNavigate } from "react-router-dom";
@@ -31,7 +30,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   // Chakra color mode
   const purple3 = useColorModeValue("purple.3", "purple.3")
-  const neutralDark0 = useColorModeValue("neutralDark.0","neutralDark.0")
+  const neutralDark0 = useColorModeValue("neutralDark.0", "neutralDark.0")
   const neutralDark4 = useColorModeValue("neutralDark.4", "neutralDark.4")
 
   //PassCorfimed
@@ -43,7 +42,7 @@ function Login() {
   const [accessEmail, setAccessEmail] = useState('');
   const [accessProfile, setAccessProfile] = useState('');
   const [accessProfileId, setAccessProfileId] = useState('');
-  const data = {isWelcomeLoading: true}
+  const data = { isWelcomeLoading: true }
 
   //const [tokenExpiration, setTokenExpiration] = useState(null);
 
@@ -57,20 +56,23 @@ function Login() {
       setProfileId(accessProfileId)
       navigate("/loading", { state: data });
     };
-  
-    setTimeout(() => {
-      handleLogin();
-    }, 3 * 1000);
+
+    handleLogin();
   }
 
   // React States
   const handleClick = () => setShow(!show);
   const [show, setShow] = React.useState(false);
+  const [isInvalidEmail, setIsInvalidEmail] = React.useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = React.useState(false);
   const [login, setLogin] = React.useState(false);
+  const [loginValue, setLoginValue] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
+  const [errorMsgEmail, setErrorMsgEmail] = React.useState("");
+  const [errorMsgPassword, setErrorMsgPassword] = React.useState("");
   const [formData, setFormData] = React.useState({
-    email: "string",
-    password: "string"
+    email: "",
+    password: ""
   });
   const [click, setClick] = React.useState({
     email: false,
@@ -78,78 +80,110 @@ function Login() {
   })
 
   // Validations States
-  const emailClicked = () => {setClick({...click, email: true})}
-  const passwordClicked = () => {setClick({...click, password: true})}
+  const emailClicked = () => { setClick({ ...click, email: true }) }
+  const passwordClicked = () => { setClick({ ...click, password: true }) }
 
   // Login request
   React.useEffect(() => {
-    if (login) {
+    if (login && formData.Text !== "" && formData.password !== "") {
       setLogin(false);
 
       axios
         .post("http://localhost:5000" + "/auth/login", formData)
         .then((response) => {
-          setErrorMsg(response.data.message);
+          console.log(response)
           setPathLogin(true)
           setAccessToken(response.data.data.accessToken);
           setAccessUserName(response.data.data.name);
           setAccessEmail(response.data.data.email);
           setAccessProfile(response.data.data.profile);
           setAccessProfileId(response.data.data.id)
-
-          //const expires_in = response.data.data
-          //const expirationTime = Date.now() + expires_in * 1000;
+          setErrorMsg("")
         })
         .catch(function (error) {
           if (error.response) {
-            console.log(error.response.data.message);
             setErrorMsg(error.response.data.message);
+            console.log(error.response);
           } else if (error.request) {
             console.log(error.request);
+            setErrorMsg(error.request)
           } else {
             console.log("Error", error.message);
+            setErrorMsg(error.message)
           }
-          console.log(error.config);
-        });
+        }, [formData, login]);
     }
-  }, [login]);
+  }, [login, loginValue]);
+
+  React.useEffect(() => {
+    const isInvalidValue = () => {
+      if (click.email == true || login) {
+        if (formData.email === "") {
+          setIsInvalidEmail(true);
+          setErrorMsgEmail("Campo Obrigatório");
+        } else if (pathLogin == false && login) {
+          if (errorMsg === "Email inválido.") {
+            console.log("Aqui")
+            setIsInvalidEmail(true);
+            setErrorMsgEmail("E-mail incorreto");
+          } else {
+            setIsInvalidEmail(false);
+            setErrorMsgEmail("");
+          }
+        } else if (pathLogin == true) {
+          setIsInvalidEmail(false);
+          setErrorMsgEmail("");
+        } else if (formData.email !== "" && errorMsg !== "Email inválido.") {
+          setIsInvalidEmail(false);
+          setErrorMsgEmail("");
+        }
+      }
+
+      if (click.password == true || login) {
+        if (formData.password === "") {
+          console.log(errorMsg)
+          setIsInvalidPassword(true);
+          setErrorMsgPassword("Campo Obrigatório");
+        } else if (pathLogin == false && login) {
+          if (errorMsg === "Senha inválida." || errorMsg === "Email inválido.") {
+            setIsInvalidPassword(true);
+            setErrorMsgPassword("Senha incorreta");
+          } else {
+            setIsInvalidPassword(false);
+            setErrorMsgPassword("");
+          }
+        } else if (pathLogin == true) {
+          setIsInvalidPassword(false);
+          setErrorMsgPassword("");
+        } else if (formData.password !== "" && errorMsg !== "Senha inválida." && errorMsg !== "Email inválido.") {
+          setIsInvalidPassword(false);
+          setErrorMsgPassword("");
+        }
+      }
+    }
+    isInvalidValue();
+  }, [click.email, click.password, formData, pathLogin, login, errorMsg])
 
   return (
-    <Flex
-      fontFamily=""
-    >
+    <Flex>
       <Flex
-        bg={purple3}
-        h= "100vh"
-        w= "60vw"
-        fontFamily="Sofia Sans"
+        backgroundImage={LoginImage}
+        backgroundSize={"cover"}
+        h="100vh"
+        w="60vw"
         alignItems="center"
         flexDirection="column"
         justifyContent="center"
         letterSpacing="1px"
       >
-        <BrandIconBlue
-          w="285px"
-          h="48px"
-        />
       </Flex>
       <Flex
         h="100vh"
-        w= "40vw"
+        w="40vw"
         alignItems="center"
         flexDirection="column"
-        justifyContent= "center"
-        // w={{ base: "100%", md: "420px" }}
-        // maxW="100%"
-        // background="transparent"
-        // borderRadius="15px"
-        // mx={{ base: "auto", lg: "unset" }}
-        // me="auto"
-        // mb={{ base: "20px", md: "auto" }}
+        justifyContent="center"
       >
-        {/* <Toast feedback={errorMsg}/> */}
-        {errorMsg}
-        
         <Text
           mb="40px"
           fontSize="32px"
@@ -157,122 +191,120 @@ function Login() {
           fontFamily="manrope"
           color={neutralDark4}
         >
-          Acesse sua conta
+          Acessar a plataforma
         </Text>
         <FormControl
           fontFamily="Inter"
           maxW="320px"
         >
-          <FormLabel
-            fontSize="sm"
-            fontWeight="400"
-            color={neutralDark0}
-            display="flex"
-            mb="8px"
-          >
-            E-mail
-          </FormLabel>
-          <Input
-            isRequired={true}
-            onInvalid="true"
-            variant={loginValidations.validateEmail(formData.email,click.email)[0]}
-            fontSize="sm"
-            ms={{ base: "0px", md: "0px" }}
-            type="email"
-            placeholder="Digite seu e-mail"
-            mb="40px"
-            size="46px"
-            onBlur={emailClicked}
-            onChange={(e) => {
-              setFormData({ ...formData, email: e.target.value });
-            }}
-          />
-          <FormLabel
-            fontSize="sm"
-            fontWeight="400"
-            color={neutralDark0}
-            display="flex"
-            mb="8px"
-          >
-            Senha
-          </FormLabel>
-          <InputGroup size="md">
+          <Flex mb={isInvalidEmail ? "24px" : "48px"} textAlign="left" flexDirection="column">
+            <FormLabel
+              textStyle="Caption"
+              fontWeight="400"
+              color={isInvalidEmail ? "rred.2" : neutralDark0}
+              display="flex"
+              mb="8px"
+            >
+              E-mail
+            </FormLabel>
             <Input
+              id="email"
               isRequired={true}
-              fontSize="sm"
-              placeholder="Digite sua senha"
-              mb="40px"
-              size="46px"
-              minLength={"8"}
-              type={show ? "text" : "password"}
-              variant={loginValidations.validatePassword(formData.password,click.password)[0]}
-              onBlur={passwordClicked}
+              isInvalid={isInvalidEmail}
+              type="email"
+              placeholder="Digite seu e-mail"
+              _placeholder={{ textColor: "neutralLight.4", textStyle: "Body" }}
+              textStyle="Body"
+              mb="8px"
+              minW="360px"
+              maxW="360px"
+              minH="52px"
+              maxH="52px"
+              onBlur={emailClicked}
               onChange={(e) => {
-                setFormData({ ...formData, password: e.target.value });
+                setFormData({ ...formData, email: e.target.value });
               }}
             />
-            <InputRightElement display="flex" alignItems="center" mt="2px">
-              <Icon
-                color={neutralDark0}
-                _hover={{ cursor: "pointer" }}
-                as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                onClick={handleClick}
+            <Text
+              textStyle="Caption"
+              textColor="rred.2"
+              display={((isInvalidEmail && click.email) || (isInvalidEmail && login)) ? "block" : "none"}
+            >
+              {errorMsgEmail}
+            </Text>
+          </Flex>
+          <Flex mb={isInvalidPassword ? "40px" : "64px"} textAlign="left" flexDirection="column">
+            <FormLabel
+              textStyle="Caption"
+              fontWeight="400"
+              color={isInvalidPassword ? "rred.2" : neutralDark0}
+              display="flex"
+              mb="8px"
+            >
+              Senha
+            </FormLabel>
+            <InputGroup alignItems="center">
+              <Input
+                id="password"
+                isRequired={true}
+                isInvalid={isInvalidPassword}
+                placeholder="Digite sua senha"
+                _placeholder={{ color: "neutralLight.4", textStyle: "Body" }}
+                textStyle="Body"
+                mb="8px"
+                minW="360px"
+                maxW="360px"
+                minH="52px"
+                maxH="52px"
+                minLength={"8"}
+                type={show ? "text" : "password"}
+                onBlur={passwordClicked}
+                onChange={(e) => {
+                  setFormData({ ...formData, password: e.target.value });
+                }}
               />
-            </InputRightElement>
-          </InputGroup>
-          <Flex 
-            justifyContent="start" 
-            align="center" 
-            mb="40px"
-          >
-            <NavLink to="/auth/forgot-password">
-              <Text
-                color={neutralDark4}
-                fontSize="16px"
-                fontWeight="400"
-                textDecorationLine="underline"
-              >
-                Esqueci minha senha
-              </Text>
-            </NavLink>
+              <InputRightElement display="flex" alignItems="center" mt="6px">
+                <Icon
+                  ml="70px"
+                  color={neutralDark0}
+                  _hover={{ cursor: "pointer" }}
+                  as={show ? OpenEyeIcon : ClosedEyeIcon}
+                  onClick={handleClick}
+                />
+              </InputRightElement>
+            </InputGroup>
+            <Text
+              textStyle="Caption"
+              textColor={isInvalidPassword ? "rred.2" : neutralDark0}
+              display={((isInvalidPassword && click.password) || (isInvalidPassword && login)) ? "block" : "none"}
+            >
+              {errorMsgPassword}
+            </Text>
           </Flex>
           <Flex
             flexDirection="column"
-            fontFamily="manrope"      
+            fontFamily="manrope"
           >
-            <NavLink to="/loading" state={{isWelcomeLoading: true}}></NavLink>
+            <NavLink to="/loading" state={{ isWelcomeLoading: true }}></NavLink>
             <Button
+              isDisabled={(formData.email === "" || formData.password === "") ? true : false}
               fontSize="sm"
               variant="primary"
               fontWeight="700"
-              w="100%"
-              h="40px"
+              w="360px"
+              h="48px"
               mb="16px"
               onClick={() => {
                 setLogin(true);
+                setLoginValue(!loginValue);
               }}
-
-              >
+            >
               Entrar
             </Button>
-
-            <NavLink to="/auth/sign-up">
-            <Button
-              fontSize="sm"
-              variant="secondary"
-              fontWeight="700"
-              w="100%"
-              h="40px"
-              mb="24px"
-            >
-              Criar minha conta
-            </Button>
-          </NavLink>
           </Flex>
-          
         </FormControl>
       </Flex>
-      </Flex> 
+    </Flex>
   );
 }
 
