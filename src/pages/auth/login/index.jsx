@@ -21,13 +21,13 @@ import { OpenEyeIcon } from "../../../components/icons/Icons";
 import { ClosedEyeIcon } from "../../../components/icons/Icons";
 import axios from "axios";
 
-import loginValidations from "./validations/loginValidations";
 import LoginImage from "./loginImage.svg";
-import { BrandIconBlue } from "../../../components/icons/Icons";
 
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const authLogin = import.meta.env.VITE_AUTH_LOGIN;
+
   // Chakra color mode
   const purple3 = useColorModeValue("purple.3", "purple.3")
   const neutralDark0 = useColorModeValue("neutralDark.0", "neutralDark.0")
@@ -43,8 +43,6 @@ function Login() {
   const [accessProfile, setAccessProfile] = useState('');
   const [accessProfileId, setAccessProfileId] = useState('');
   const data = { isWelcomeLoading: true }
-
-  //const [tokenExpiration, setTokenExpiration] = useState(null);
 
   if (pathLogin == true) {
     setPathLogin(false)
@@ -89,27 +87,25 @@ function Login() {
       setLogin(false);
 
       axios
-        .post("http://localhost:5000" + "/auth/login", formData)
+        .post(authLogin, formData)
         .then((response) => {
-          console.log(response)
-          setPathLogin(true)
+          setPathLogin(true);
           setAccessToken(response.data.data.accessToken);
           setAccessUserName(response.data.data.name);
           setAccessEmail(response.data.data.email);
           setAccessProfile(response.data.data.profile);
-          setAccessProfileId(response.data.data.id)
-          setErrorMsg("")
+          setAccessProfileId(response.data.data.id);
+          setErrorMsg("");
         })
         .catch(function (error) {
           if (error.response) {
             setErrorMsg(error.response.data.message);
-            console.log(error.response);
           } else if (error.request) {
             console.log(error.request);
             setErrorMsg(error.request)
           } else {
             console.log("Error", error.message);
-            setErrorMsg(error.message)
+            setErrorMsg(error.message);
           }
         }, [formData, login]);
     }
@@ -123,7 +119,6 @@ function Login() {
           setErrorMsgEmail("Campo Obrigatório");
         } else if (pathLogin == false && login) {
           if (errorMsg === "Email inválido.") {
-            console.log("Aqui")
             setIsInvalidEmail(true);
             setErrorMsgEmail("E-mail incorreto");
           } else {
@@ -141,7 +136,6 @@ function Login() {
 
       if (click.password == true || login) {
         if (formData.password === "") {
-          console.log(errorMsg)
           setIsInvalidPassword(true);
           setErrorMsgPassword("Campo Obrigatório");
         } else if (pathLogin == false && login) {
@@ -162,7 +156,7 @@ function Login() {
       }
     }
     isInvalidValue();
-  }, [click.email, click.password, formData, pathLogin, login, errorMsg])
+  }, [click.email, click.password, formData, pathLogin, loginValue, errorMsg])
 
   return (
     <Flex>
@@ -200,7 +194,6 @@ function Login() {
           <Flex mb={isInvalidEmail ? "24px" : "48px"} textAlign="left" flexDirection="column">
             <FormLabel
               textStyle="Caption"
-              fontWeight="400"
               color={isInvalidEmail ? "rred.2" : neutralDark0}
               display="flex"
               mb="8px"
@@ -236,7 +229,6 @@ function Login() {
           <Flex mb={isInvalidPassword ? "40px" : "64px"} textAlign="left" flexDirection="column">
             <FormLabel
               textStyle="Caption"
-              fontWeight="400"
               color={isInvalidPassword ? "rred.2" : neutralDark0}
               display="flex"
               mb="8px"

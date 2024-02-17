@@ -11,31 +11,30 @@ const AuthProvider = ({ children }) => {
   const [profile, setProfile_] = useState(localStorage.getItem('profile'))
   const [profileId, setProfileId_] = useState(localStorage.getItem('profileId'))
 
-
   // Function to set the authentication token
   const setToken = (newToken) => {
     setToken_(newToken);
   };
 
-  const setUserName = (userName) =>{
+  const setUserName = (userName) => {
     setUserName_(userName);
   }
 
-  const setEmail = (email) =>{
+  const setEmail = (email) => {
     setEmail_(email);
   }
 
-  const setProfile = (profile) =>{
+  const setProfile = (profile) => {
     setProfile_(profile);
   }
-  const setProfileId = (profileId) =>{
+  const setProfileId = (profileId) => {
     setProfileId_(profileId);
   }
 
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      localStorage.setItem('token',token);
+      localStorage.setItem('token', token);
       localStorage.setItem('userName', userName);
       localStorage.setItem('email', email);
       localStorage.setItem('profile', profile);

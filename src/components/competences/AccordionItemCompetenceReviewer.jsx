@@ -46,7 +46,7 @@ export default function AccordionItemCompetenceReviewer(props) {
     return (
         <AccordionItem bg="neutralLight.0">
             <h2>
-                <AccordionButton _focus="null">
+                <AccordionButton>
                     <Box textColor="neutralDark.4" textStyle="Body1" as="span" flex='1' textAlign='left'>
                        {props.competence_title}
                     </Box>
@@ -64,7 +64,6 @@ export default function AccordionItemCompetenceReviewer(props) {
                         <ButtonGroup>
                             <HStack spacing='1px'>
                                 <Button minW="71px"
-                                    _focus="null"
                                     variant={grade === 1 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(1)}
                                     value='1'
@@ -72,7 +71,6 @@ export default function AccordionItemCompetenceReviewer(props) {
                                     1
                                 </Button>
                                 <Button minW="71px"
-                                    _focus="null"
                                     variant={grade === 2 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(2)}
                                     value='2'
@@ -80,7 +78,6 @@ export default function AccordionItemCompetenceReviewer(props) {
                                     2
                                 </Button>
                                 <Button minW="71px"
-                                    _focus="null"
                                     variant={grade === 3 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(3)}
                                     value='3'
@@ -88,7 +85,6 @@ export default function AccordionItemCompetenceReviewer(props) {
                                     3
                                 </Button>
                                 <Button minW="71px"
-                                    _focus="null"
                                     variant={grade === 4 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(4)}
                                     value='4'
@@ -96,7 +92,6 @@ export default function AccordionItemCompetenceReviewer(props) {
                                     4
                                 </Button>
                                 <Button minW="71px"
-                                    _focus="null"
                                     variant={grade === 5 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(5)}
                                     value='5'

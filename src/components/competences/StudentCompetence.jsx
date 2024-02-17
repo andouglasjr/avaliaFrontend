@@ -48,6 +48,7 @@ export default function StudentCompetence(props) {
 
       >
         <Flex
+          key="1"
           borderTopRightRadius="16px"
           borderTopLeftRadius="16px"
           bg="neutralLight.0"
@@ -65,8 +66,9 @@ export default function StudentCompetence(props) {
           </Box>
           <Spacer />
         </Flex>
-        {reviewers.map((reviewer) => (
+        {reviewers.map((reviewer, index) => (
           <Flex
+            key={index}
             display={reviewer.reviewer.account.name == null ? "none" : "block"}
             minH="44px"
             bg="neutralLight.1"
@@ -93,7 +95,7 @@ export default function StudentCompetence(props) {
                     </Text>
                     <Spacer />
                     <StatusBadge
-                      label={reviewer.grade_total || null}
+                      label={String(reviewer.grade_total) || null}
                       margT="16px"
                       margR="10px"
                       variant={checkStatusBadgeColor(reviewer.grade_total)}
