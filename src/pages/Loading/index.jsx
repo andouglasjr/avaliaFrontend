@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function EssayGenerationLoading() {
+  const essayCorrect = import.meta.env.VITE_ESSAY_CORRECT;
 
   const location = useLocation();
   const state1 = location.state;
@@ -57,7 +58,7 @@ function EssayGenerationLoading() {
     if (!state1.isWelcomeLoading) {
       const fetchData = async () => {
         axios
-          .get("http://localhost:5000" + "/essay/correct/" + state1.id)
+          .get(essayCorrect + state1.id)
           .then((response) => {
             studentEssayCorrect(response.data.data.essay_id);
           })

@@ -9,6 +9,9 @@ import axios from "axios";
 import StickyBox from "react-sticky-box";
 
 function EvaluationScreen(props) {
+  const genericData = import.meta.env.VITE_GENERIC_GET_EVALUATIONSCREENDATA;
+  const genericReview = import.meta.env.VITE_GENERIC_GET_EVALUATIONSCREEN_REVIEW;
+
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,9 +23,9 @@ function EvaluationScreen(props) {
       try {
         let response;
         if(localStorage.getItem("profile") === "student"){
-          response = await axios.get("http://localhost:5000/generic/get/evaluationScreenData/" + state.id );
+          response = await axios.get(genericData + state.id );
         }else{
-          response = await axios.get("http://localhost:5000/generic/get/evaluationScreen/review");
+          response = await axios.get(genericReview);
         }
         setData(response.data.data);
         setIsLoading(false);

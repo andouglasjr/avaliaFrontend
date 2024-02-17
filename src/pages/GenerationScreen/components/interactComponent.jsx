@@ -30,7 +30,10 @@ function replaceSpaces(text, replaces) {
         return text;
     }
 
-    return text.replace(/{([^}]+)}/g, (match, key) => replaces[key] || match);
+    const replacedText = text.replace(/\{([^}]+)\}/g, (match, key) => replaces[key] || match);
+    const boldedText = replacedText.replace(/"([^"]+)"/g, (_, captured) => `"<b>${captured}</b>"`);
+
+    return <div dangerouslySetInnerHTML={{ __html: boldedText }} />;
 }
 
 const Loading = function loadingFunction(props) {
@@ -289,6 +292,10 @@ const InputComponent = function inputComponentFunction(props) {
 }
 
 const EssayComponent = function essayComponentFunction(props) {
+    const subjectCreate = import.meta.env.VITE_SUBJECT_CREATE;
+    const subjectGet = import.meta.env.VITE_SUBJECT_GET
+    const essayCreate = import.meta.env.VITE_ESSAY_CREATE;
+
     const { inputValue, setEssayId } = props;
 
     const [permission, setPermission] = useState(false);
@@ -310,7 +317,7 @@ const EssayComponent = function essayComponentFunction(props) {
 
     useEffect(() => {
         axios
-            .post("http://localhost:5000" + "/subject/create", localInputValue)
+            .post(subjectCreate, localInputValue)
             .then((response) => {
                 setSubject_id(response.data.data.id);
                 console.log(response.data.data.id)
@@ -334,7 +341,7 @@ const EssayComponent = function essayComponentFunction(props) {
     useEffect(() => {
         if (error == true) {
             axios
-                .get("http://localhost:5000" + "/subject/get/" + localInputValue.name)
+                .get(subjectGet + localInputValue.name)
                 .then((response) => {
                     setSubject_id(response.data.data.id);
                     console.log(response.data.data.id)
@@ -368,9 +375,9 @@ const EssayComponent = function essayComponentFunction(props) {
 
     useEffect(() => {
         if ((formData.text != "" && formData.subject_id != "")) {
-            const essayCreate = async (formData) => {
+            const essayCreateFunction = async (formData) => {
                 axios
-                    .post("http://localhost:5000" + "/essay/create", formData)
+                    .post(essayCreate, formData)
                     .then((response) => {
                         loading(response.data.data.id);
                         console.log(response);
@@ -386,7 +393,7 @@ const EssayComponent = function essayComponentFunction(props) {
                         console.log(error.config);
                     }, [formData]);
             }
-            essayCreate(formData);
+            essayCreateFunction(formData);
         }
     }, [formData]);
 
@@ -398,7 +405,9 @@ const EssayComponent = function essayComponentFunction(props) {
 }
 
 const Select = function selectFunction(props) {
-    const { trigger, setFlowPermission, setID, id, inputValue, setInputValue, c, setC } = props;
+    const subjectGenerate = import.meta.env.VITE_SUBJECT_GENERATE;
+
+    const { trigger, setFlowPermissionSelect, setID, id, inputValue, setInputValue, c, setC } = props;
 
     const [options, setOptions] = useState([]);
 
@@ -429,11 +438,11 @@ const Select = function selectFunction(props) {
                 setC(1)
 
                 axios
-                    .get("http://localhost:5000" + "/subject/generate?" + inputValueVerified + "quantity=" + quantity)
+                    .get(subjectGenerate + inputValueVerified + "quantity=" + quantity)
                     .then((response) => {
                         setOptions(response.data.data.subjects)
                         setIsLoading(false);
-                        setFlowPermission(true)
+                        setFlowPermissionSelect(true)
                         console.log(response)
                     })
                     .catch(function (error) {
@@ -512,6 +521,8 @@ const Select = function selectFunction(props) {
 }
 
 const End = function endFunction(props) {
+    const essayGenerate = import.meta.env.VITE_ESSAY_GENERATE;
+
     const { inputValue, writer, setWriter } = props;
 
     const [isLoading, setIsLoading] = useState(true);
@@ -530,7 +541,7 @@ const End = function endFunction(props) {
         const fetchData = async () => {
             if (writer == false) {
                 axios
-                    .get("http://localhost:5000" + "/essay/generate/?subject=" + inputValue)
+                    .get(essayGenerate + inputValue)
                     .then((response) => {
                         setIsLoading(false);
                         setEssayId(response.data.data.id)
@@ -576,7 +587,7 @@ const End = function endFunction(props) {
 }
 
 const Options = function optionsFunction(props) {
-    const { writer, setWriter, c, setC, trigger, inputValue, setInputValue, setInputEditing, inputEditing, id, setID, text, type, options, setFlowPermission } = props;
+    const { writer, setWriter, c, setC, trigger, inputValue, setInputValue, setInputEditing, inputEditing, id, setID, text, type, options, setFlowPermissionSelect } = props;
 
     const optionsSet = () => {
         if (type === "buttonInitial") {
@@ -589,7 +600,7 @@ const Options = function optionsFunction(props) {
             return <InputComponent inputValue={inputValue} setInputValue={setInputValue} setInputEditing={setInputEditing} inputEditing={inputEditing} id={id} setID={setID} trigger={trigger} />;
         };
         if (type === "select") {
-            return <Select c={c} setC={setC} inputValue={inputValue} setInputValue={setInputValue} id={id} setID={setID} setFlowPermission={setFlowPermission} trigger={trigger} />;
+            return <Select c={c} setC={setC} inputValue={inputValue} setInputValue={setInputValue} id={id} setID={setID} setFlowPermissionSelect={setFlowPermissionSelect} trigger={trigger} />;
         };
         if (type === "end") {
             return <End inputValue={inputValue} writer={writer} setWriter={setWriter} />;
@@ -600,10 +611,10 @@ const Options = function optionsFunction(props) {
 }
 
 const Flow = function flowFunction(props) {
-    const { flow, flowPermission } = props;
+    const { flow, flowPermissionSelect } = props;
 
     return (
-        <Text display={(flowPermission ? "block" : "none")} textAlign="justify" textStyle="Body">
+        <Text display={(flowPermissionSelect ? "block" : "none")} textAlign="justify" textStyle="Body">
             {(flow == null || flow == "") ? null : flow}
         </Text>
     );
@@ -663,7 +674,7 @@ function interactComponent() {
     const [inputEditing, setInputEditing] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [inputLocalValue, setInputLocalValue] = useState("");
-    const [flowPermission, setFlowPermission] = useState(false);
+    const [flowPermissionSelect, setFlowPermissionSelect] = useState(false);
     const [writer, setWriter] = useState(false);
     const [c, setC] = useState(false);
 
@@ -712,7 +723,7 @@ function interactComponent() {
                             })}
                             {flow.map((flow, flowIndex) => {
                                 return (
-                                    <Flow flowPermission={flowPermission} flow={flow} key={index + "-" + flowIndex} />
+                                    <Flow flowPermissionSelect={flowPermissionSelect} flow={flow} key={index + "-" + flowIndex} />
                                 )
                             })}
                             <Options
@@ -724,7 +735,7 @@ function interactComponent() {
                                 inputValue={inputValue}
                                 setInputEditing={setInputEditing}
                                 inputEditing={inputEditing}
-                                setFlowPermission={setFlowPermission}
+                                setFlowPermissionSelect={setFlowPermissionSelect}
                                 options={ac.options}
                                 type={ac.response_type}
                                 trigger={ac.options.map(item => item.trigger)}

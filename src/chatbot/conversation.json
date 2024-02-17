@@ -219,7 +219,7 @@
                     "Procurando tema de anos anteriores..."
                 ],
                 "flow": [
-                    "Encontrei! O tema escolhido foi {tema}, do ENEM {ano}. Escreva a redação logo abaixo. Assim que terminar, é só enviar que eu cuido da correção para você."
+                    "Encontrei! O tema escolhido foi \"{tema}\", do ENEM \"{ano}\". Escreva a redação logo abaixo. Assim que terminar, é só enviar que eu cuido da correção para você."
                 ]
             },
             "response_type": "end",
@@ -233,12 +233,8 @@
         {
             "id": "11",
             "message": {
-                "first": [
-                    "Gerando opções de tema para você..."
-                ],
-                "next": [
-                    "Gerando opções de tema para você..."
-                ],
+                "first": [],
+                "next": [],
                 "flow": [
                     "Elaborei algumas opções de tema para você. Qual você prefere?"
                 ]
@@ -255,10 +251,10 @@
             "id": "12",
             "message": {
                 "first": [
-                    "Excelente! Estou gerando uma redação com base no tema {tema}. Logo você terá acesso à versão corrigida por mim."
+                    "Excelente! Estou gerando uma redação com base no tema \"{tema}\". Logo você terá acesso à versão corrigida por mim."
                 ],
                 "next": [
-                    "Excelente! Estou gerando uma redação com base no tema {tema}. Logo você terá acesso à versão corrigida por mim."
+                    "Excelente! Estou gerando uma redação com base no tema \"{tema}\". Logo você terá acesso à versão corrigida por mim."
                 ],
                 "flow": []
             },
@@ -274,10 +270,10 @@
             "id": "13",
             "message": {
                 "first": [
-                    "Pronto! O tema escolhido foi {tema}. Agora, vou gerar a redação e corrigi-la. Aguarde enquanto preparo tudo para você."
+                    "Pronto! O tema escolhido foi \"{tema}\". Agora, vou gerar a redação e corrigi-la. Aguarde enquanto preparo tudo para você."
                 ],
                 "next": [
-                    "Pronto! O tema escolhido foi {tema}. Agora, vou gerar a redação e corrigi-la. Aguarde enquanto preparo tudo para você."
+                    "Pronto! O tema escolhido foi \"{tema}\". Agora, vou gerar a redação e corrigi-la. Aguarde enquanto preparo tudo para você."
                 ],
                 "flow": [
                     "Tudo pronto! Você será redirecionado ao nosso espaço de redação para conferir o texto gerado."
@@ -314,10 +310,10 @@
             "id": "15",
             "message": {
                 "first": [
-                    "Escreva a redação sobre {tema} logo abaixo. Assim que terminar, é só enviar que eu cuido da correção para você."
+                    "Escreva a redação sobre \"{tema}\" logo abaixo. Assim que terminar, é só enviar que eu cuido da correção para você."
                 ],
                 "next": [
-                    "Escreva a redação sobre {tema} logo abaixo. Assim que terminar, é só enviar que eu cuido da correção para você."
+                    "Escreva a redação sobre \"{tema}\" logo abaixo. Assim que terminar, é só enviar que eu cuido da correção para você."
                 ],
                 "flow": []
             },
@@ -357,7 +353,7 @@
                 "next": [
                     "Procurando tema de anos anteriores..."
                 ],
-                "flow": [ "Encontrei! O tema escolhido foi {tema}, do ENEM {ano}. Aguarde enquanto preparo tudo para você."
+                "flow": [ "Encontrei! O tema escolhido foi \"{tema}\", do ENEM \"{ano}\". Aguarde enquanto preparo tudo para você."
                 ]
             },
             "response_type": "end",
@@ -391,10 +387,10 @@
             "id": "20",
             "message": {
                 "first": [
-                    "Excelente! Estou gerando uma redação com base no tema {tema}. Logo você terá acesso à versão corrigida por mim."
+                    "Excelente! Estou gerando uma redação com base no tema \"{tema}\". Logo você terá acesso à versão corrigida por mim."
                 ],
                 "next": [
-                    "Excelente! Estou gerando uma redação com base no tema {tema}. Logo você terá acesso à versão corrigida por mim."
+                    "Excelente! Estou gerando uma redação com base no tema \"{tema}\". Logo você terá acesso à versão corrigida por mim."
                 ],
                 "flow": []
             },
