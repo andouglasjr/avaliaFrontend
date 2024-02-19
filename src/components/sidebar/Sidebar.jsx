@@ -23,7 +23,11 @@ function Sidebar(props) {
   const navigate = useNavigate();
 
   const handleClickTheme = () => {
-    navigate("/generationScreen");
+    if(localStorage.getItem("profile") === "reviewer"){
+      navigate("/reviewerDashboard")
+    }else {
+      navigate("/generationScreen");
+    }
   };
 
   return (
@@ -44,7 +48,7 @@ function Sidebar(props) {
         <Flex w="240px" h="68px" bg="transparent">
           <Brand />
         </Flex>
-        <Flex direction="column" mt="1px" w="240px" h="95vh" bg="transparent">
+        <Flex align="center" direction="column" mt="1px" w="240px" h="95vh" bg="transparent">
           <CustomButton
             variant="secondary"
             onClick={handleClickTheme}
@@ -53,9 +57,9 @@ function Sidebar(props) {
             mt="16px"
             marginLeft="12px"
             w="216px"
-            label="Nova Redação"
+            h="40px"
+            label={localStorage.getItem("profile") === "reviewer" ? "DashBoard" : "Nova Redação"}
           />
-          
         </Flex>
         <Flex ml="12px" w="216px" h="1px" bg="neutralLight.1" />
         <Flex w="240px" h="5vh" bg="transparent">

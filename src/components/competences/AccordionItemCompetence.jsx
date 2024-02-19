@@ -31,7 +31,7 @@ export default function AccordionItemCompetence(props) {
     return (
         <AccordionItem bg="neutralLight.0">
             <h2>
-                <AccordionButton minH="60px">
+                <AccordionButton _hover={{ borderColor: "transparent" }} _focus={{ outline: "none"}} minH="60px">
                     <Box
                         textColor="neutralDark.4"
                         textStyle="Body1"

@@ -5,7 +5,6 @@ import { useAuth } from "./authToken";
 
 // Chakra imports
 import {
-  Button,
   Flex,
   FormControl,
   FormLabel,
@@ -21,12 +20,47 @@ import { OpenEyeIcon } from "../../../components/icons/Icons";
 import { ClosedEyeIcon } from "../../../components/icons/Icons";
 import axios from "axios";
 
+//Others Imports
+import Button from "../../../components/button/Button";
+
 import LoginImage from "./loginImage.svg";
 
 import { useNavigate } from "react-router-dom";
 
+const Loading = function loadingFunction(props) {
+  const { isLoading, formData, setLogin, setLoginValue, loginValue } = props;
+
+  return (
+    <div>
+      <Flex
+        flexDirection="column"
+        fontFamily="manrope"
+      >
+        <NavLink to="/loading" state={{ isWelcomeLoading: true }}></NavLink>
+        <Button
+          isLoading={isLoading}
+          rightIcon="false"
+          isDisabled={(formData.email === "" || formData.password === "") ? true : false}
+          variant="primary"
+          w="360px"
+          h="48px"
+          mb="16px"
+          mt="0px"
+          onClick={() => {
+            setLogin(true);
+            setLoginValue(!loginValue);
+          }}
+          label="Entrar"
+        />
+      </Flex>
+    </div>
+  );
+}
+
 function Login() {
   const authLogin = import.meta.env.VITE_AUTH_LOGIN;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   // Chakra color mode
   const purple3 = useColorModeValue("purple.3", "purple.3")
@@ -65,6 +99,7 @@ function Login() {
   const [isInvalidPassword, setIsInvalidPassword] = React.useState(false);
   const [login, setLogin] = React.useState(false);
   const [loginValue, setLoginValue] = React.useState(false);
+  const [loginValueCompare, setLoginValueCompare] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
   const [errorMsgEmail, setErrorMsgEmail] = React.useState("");
   const [errorMsgPassword, setErrorMsgPassword] = React.useState("");
@@ -85,6 +120,8 @@ function Login() {
   React.useEffect(() => {
     if (login && formData.Text !== "" && formData.password !== "") {
       setLogin(false);
+      setIsLoading(true);
+      setLoginValueCompare(loginValue);
 
       axios
         .post(authLogin, formData)
@@ -96,17 +133,22 @@ function Login() {
           setAccessProfile(response.data.data.profile);
           setAccessProfileId(response.data.data.id);
           setErrorMsg("");
+          setIsLoading(false)
         })
         .catch(function (error) {
           if (error.response) {
             setErrorMsg(error.response.data.message);
+            setIsLoading(false)
           } else if (error.request) {
             console.log(error.request);
-            setErrorMsg(error.request)
+            setErrorMsg(error.request);
+            setIsLoading(false)
           } else {
             console.log("Error", error.message);
             setErrorMsg(error.message);
+            setIsLoading(false)
           }
+          setIsLoading(false)
         }, [formData, login]);
     }
   }, [login, loginValue]);
@@ -117,7 +159,7 @@ function Login() {
         if (formData.email === "") {
           setIsInvalidEmail(true);
           setErrorMsgEmail("Campo Obrigatório");
-        } else if (pathLogin == false && login) {
+        } else if (pathLogin == false && loginValueCompare == loginValue) {
           if (errorMsg === "Email inválido.") {
             setIsInvalidEmail(true);
             setErrorMsgEmail("E-mail incorreto");
@@ -138,7 +180,7 @@ function Login() {
         if (formData.password === "") {
           setIsInvalidPassword(true);
           setErrorMsgPassword("Campo Obrigatório");
-        } else if (pathLogin == false && login) {
+        } else if (pathLogin == false && loginValueCompare == loginValue) {
           if (errorMsg === "Senha inválida." || errorMsg === "Email inválido.") {
             setIsInvalidPassword(true);
             setErrorMsgPassword("Senha incorreta");
@@ -155,8 +197,11 @@ function Login() {
         }
       }
     }
-    isInvalidValue();
-  }, [click.email, click.password, formData, pathLogin, loginValue, errorMsg])
+
+    if(isLoading == false || isLoading === "false") {
+      isInvalidValue();
+    }
+  }, [click.email, click.password, formData, pathLogin, isLoading, errorMsg])
 
   return (
     <Flex>
@@ -273,27 +318,7 @@ function Login() {
               {errorMsgPassword}
             </Text>
           </Flex>
-          <Flex
-            flexDirection="column"
-            fontFamily="manrope"
-          >
-            <NavLink to="/loading" state={{ isWelcomeLoading: true }}></NavLink>
-            <Button
-              isDisabled={(formData.email === "" || formData.password === "") ? true : false}
-              fontSize="sm"
-              variant="primary"
-              fontWeight="700"
-              w="360px"
-              h="48px"
-              mb="16px"
-              onClick={() => {
-                setLogin(true);
-                setLoginValue(!loginValue);
-              }}
-            >
-              Entrar
-            </Button>
-          </Flex>
+          <Loading isLoading={isLoading} formData={formData} setLoginValue={setLoginValue} setLogin={setLogin} loginValue={loginValue} />
         </FormControl>
       </Flex>
     </Flex>

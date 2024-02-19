@@ -22,9 +22,9 @@ function EvaluationScreen(props) {
     const fetchData = async () => {
       try {
         let response;
-        if(localStorage.getItem("profile") === "student"){
-          response = await axios.get(genericData + state.id );
-        }else{
+        if (localStorage.getItem("profile") === "student") {
+          response = await axios.get(genericData + state.id);
+        } else {
           response = await axios.get(genericReview);
         }
         setData(response.data.data);
@@ -43,12 +43,11 @@ function EvaluationScreen(props) {
   return (
     <div>
       {localStorage.getItem("profile") === "student" ?
-        (<Flex h="100%" width="100vw" bg="neutralLight.3">
-
-          <Flex mt="32px" ml="47" width="100vw" flexDirection="column" alignItems="center">
+        (<Flex h="100%" width="100vw" bg="neutralLight.2">
+          <Flex mt="32px" ml="287px" width="100vw" flexDirection="column">
             <Text
               textAlign="left"
-              mb="32px"
+              mb="40px"
               h="44px"
               w="65%"
               textStyle="h3"
@@ -76,13 +75,13 @@ function EvaluationScreen(props) {
               </div>
             </Flex>
           </Flex>
-        </Flex>) : (
-          <Flex h="100%" width="100vw" bg="neutralLight.0">
-
-            <Flex mt="32px" ml="47" width="100vw" flexDirection="column" alignItems="center">
+        </Flex>
+        ) : (
+          <Flex h="100%" width="100vw" bg="neutralLight.2">
+            <Flex mt="32px" width="100vw" flexDirection="column">
               <Text
                 textAlign="left"
-                mb="32px"
+                mb="40px"
                 h="44px"
                 w="65%"
                 textStyle="h3"
@@ -100,8 +99,8 @@ function EvaluationScreen(props) {
                 <div className="row">
                   <StickyBox offsetTop={20} offsetBottom={20}>
                     <Flex ml="28px" h="126px">
-                      <ReviewerCompetence 
-                        subject={data.essay} 
+                      <ReviewerCompetence
+                        subject={data.essay}
                         data={data} />
                     </Flex>
                   </StickyBox>

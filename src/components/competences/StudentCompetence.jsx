@@ -41,7 +41,7 @@ export default function StudentCompetence(props) {
     >
       <Accordion
         w="25vw"
-        
+
         allowToggle
         borderBottomRightRadius="16px"
         borderBottomLeftRadius="16px"
@@ -76,7 +76,7 @@ export default function StudentCompetence(props) {
           >
             <AccordionItem bg="transparent">
               <h2>
-                <AccordionButton bg="neutralLight.1" maxH="60px" _focus="null">
+                <AccordionButton _hover={{ borderColor: "transparent" }} _focus={{ outline: "none" }} bg="neutralLight.1" maxH="60px">
                   <Stack
                     direction="row"
                     textColor="neutralDark.4"
@@ -148,7 +148,7 @@ export default function StudentCompetence(props) {
                     comment={reviewer.grade_5_opinion}
                   />
 
-                  
+
                 </Accordion>
               </AccordionPanel>
             </AccordionItem>

@@ -11,7 +11,6 @@ import {
     Spacer,
     ButtonGroup,
     HStack,
-    Button,
     Textarea,
     Flex,
     Stack,
@@ -20,9 +19,10 @@ import {
 import GPTLogo from "./GPTLogo.svg";
 import StatusBadge from "../statusBadge/StatusBadge";
 import { PlusIcon, LessIcon } from "../icons/Icons";
+import Button from "../button/Button";
 
 export default function AccordionItemCompetenceReviewer(props) {
-    const [grade, setGrade] = useState("");
+    const [grade, setGrade] = useState("0");
     const [comment, setComment] = useState("");
     const [valueId, setValueId] = useState(props.value_id);
 
@@ -30,15 +30,15 @@ export default function AccordionItemCompetenceReviewer(props) {
         setGrade(value);
     };
 
-    const handleComment = (event) =>{
+    const handleComment = (event) => {
         setComment(event.target.value)
     };
 
-    const returnReport = () =>{
-        props.onMessage({valueId, grade, comment})
+    const returnReport = () => {
+        props.onMessage({ valueId, grade, comment })
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         returnReport();
 
     }, [grade, comment])
@@ -46,9 +46,9 @@ export default function AccordionItemCompetenceReviewer(props) {
     return (
         <AccordionItem bg="neutralLight.0">
             <h2>
-                <AccordionButton>
+                <AccordionButton _hover={{ borderColor: "transparent" }} _focus={{ outline: "none" }}>
                     <Box textColor="neutralDark.4" textStyle="Body1" as="span" flex='1' textAlign='left'>
-                       {props.competence_title}
+                        {props.competence_title}
                     </Box>
                     <AccordionIcon color="neutralDark.0" boxSize="24px" />
                 </AccordionButton>
@@ -62,41 +62,46 @@ export default function AccordionItemCompetenceReviewer(props) {
                 <Box>
                     <FormControl isRequired mt="24px" as='fieldset'>
                         <ButtonGroup>
-                            <HStack spacing='1px'>
-                                <Button minW="71px"
+                            <HStack>
+                                <Button
+                                    w="71px"
                                     variant={grade === 1 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(1)}
                                     value='1'
+                                    label="1"
                                 >
-                                    1
                                 </Button>
-                                <Button minW="71px"
+                                <Button
+                                    w="71px"
                                     variant={grade === 2 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(2)}
                                     value='2'
+                                    label="2"
                                 >
-                                    2
                                 </Button>
-                                <Button minW="71px"
+                                <Button
+                                    w="71px"
                                     variant={grade === 3 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(3)}
                                     value='3'
+                                    label="3"
                                 >
-                                    3
                                 </Button>
-                                <Button minW="71px"
+                                <Button
+                                    w="71px"
                                     variant={grade === 4 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(4)}
                                     value='4'
+                                    label="4"
                                 >
-                                    4
                                 </Button>
-                                <Button minW="71px"
+                                <Button
+                                    w="71px"
                                     variant={grade === 5 ? "primary" : "offWihtTextColor"}
                                     onClick={() => handleButtonClickGrade(5)}
                                     value='5'
+                                    label="5"
                                 >
-                                    5
                                 </Button>
                             </HStack>
                         </ButtonGroup>
@@ -111,7 +116,7 @@ export default function AccordionItemCompetenceReviewer(props) {
                             name="Description"
                             value={comment}
                             onChange={handleComment}
-                            
+
                         />
                     </FormControl>
                 </Box>
