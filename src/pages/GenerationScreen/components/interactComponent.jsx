@@ -523,7 +523,7 @@ const Select = function selectFunction(props) {
 const End = function endFunction(props) {
     const essayGenerate = import.meta.env.VITE_ESSAY_GENERATE;
 
-    const { inputValue, writer, setWriter } = props;
+    const { inputValue, writer, setWriter, setFlowPermissionEnd } = props;
 
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -544,7 +544,8 @@ const End = function endFunction(props) {
                     .get(essayGenerate + inputValue)
                     .then((response) => {
                         setIsLoading(false);
-                        setEssayId(response.data.data.id)
+                        setEssayId(response.data.data.id);
+                        setFlowPermissionEnd(true);
                     })
                     .catch(function (error) {
                         if (error.response) {
@@ -579,7 +580,7 @@ const End = function endFunction(props) {
         } else {
             setTimeout(() => {
                 navigate("/loading", { state: data });
-            }, 4 * 1000);
+            }, 5 * 1000);
         }
     }
 
@@ -587,7 +588,7 @@ const End = function endFunction(props) {
 }
 
 const Options = function optionsFunction(props) {
-    const { writer, setWriter, c, setC, trigger, inputValue, setInputValue, setInputEditing, inputEditing, id, setID, text, type, options, setFlowPermissionSelect } = props;
+    const { writer, setWriter, c, setC, trigger, inputValue, setInputValue, setInputEditing, inputEditing, id, setID, text, type, options, setFlowPermissionSelect, setFlowPermissionEnd } = props;
 
     const optionsSet = () => {
         if (type === "buttonInitial") {
@@ -603,7 +604,7 @@ const Options = function optionsFunction(props) {
             return <Select c={c} setC={setC} inputValue={inputValue} setInputValue={setInputValue} id={id} setID={setID} setFlowPermissionSelect={setFlowPermissionSelect} trigger={trigger} />;
         };
         if (type === "end") {
-            return <End inputValue={inputValue} writer={writer} setWriter={setWriter} />;
+            return <End setFlowPermissionEnd={setFlowPermissionEnd} inputValue={inputValue} writer={writer} setWriter={setWriter} />;
         };
     }
 
@@ -611,12 +612,17 @@ const Options = function optionsFunction(props) {
 }
 
 const Flow = function flowFunction(props) {
-    const { flow, flowPermissionSelect } = props;
+    const { flow, flowEnd, flowPermissionSelect, flowPermissionEnd } = props;
 
     return (
-        <Text display={(flowPermissionSelect ? "block" : "none")} textAlign="justify" textStyle="Body">
-            {(flow == null || flow == "") ? null : flow}
-        </Text>
+        <div>
+            <Text display={(flowPermissionSelect ? "block" : "none")} textAlign="justify" textStyle="Body">
+                {(flow == null || flow == "") ? null : flow}
+            </Text>
+            <Text display={(flowPermissionEnd ? "block" : "none")} textAlign="justify" textStyle="Body">
+                {(flowEnd == null || flowEnd == "") ? null : flowEnd}
+            </Text>
+        </div>
     );
 }
 
@@ -675,6 +681,8 @@ function interactComponent() {
     const [inputValue, setInputValue] = useState("");
     const [inputLocalValue, setInputLocalValue] = useState("");
     const [flowPermissionSelect, setFlowPermissionSelect] = useState(false);
+    const [flowPermissionEnd, setFlowPermissionEnd] = useState(false);
+    const [flowEnd, setFlowEnd] = useState("");
     const [writer, setWriter] = useState(false);
     const [c, setC] = useState(false);
 
@@ -697,6 +705,10 @@ function interactComponent() {
             {allChat.map((ac, index) => {
                 const first = ac.message.first;
                 const flow = ac.message.flow;
+                if(ac.response_type === "end") {
+                    setFlowEnd(ac.message.flow);
+                    console.log(flowEnd)
+                }
                 return (
                     <Flex key={index} maxW="680px" minW="680px" flexDirection="column">
                         <Flex key={index + "1"} minW="680px" mt="40px">
@@ -723,7 +735,7 @@ function interactComponent() {
                             })}
                             {flow.map((flow, flowIndex) => {
                                 return (
-                                    <Flow flowPermissionSelect={flowPermissionSelect} flow={flow} key={index + "-" + flowIndex} />
+                                    <Flow flowEnd={flowEnd} flowPermissionSelect={flowPermissionSelect} flowPermissionEnd={flowPermissionEnd} flow={flow} key={index + "-" + flowIndex} />
                                 )
                             })}
                             <Options
@@ -736,6 +748,7 @@ function interactComponent() {
                                 setInputEditing={setInputEditing}
                                 inputEditing={inputEditing}
                                 setFlowPermissionSelect={setFlowPermissionSelect}
+                                setFlowPermissionEnd={setFlowPermissionEnd}
                                 options={ac.options}
                                 type={ac.response_type}
                                 trigger={ac.options.map(item => item.trigger)}

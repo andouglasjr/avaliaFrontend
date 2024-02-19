@@ -50,7 +50,7 @@ function EssayGenerationLoading() {
 
       setTimeout(() => {
         navigate("/evaluationScreen", { state: data });
-      }, 3200);
+      }, 2400);
     }
   }
 

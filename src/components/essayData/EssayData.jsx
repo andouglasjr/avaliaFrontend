@@ -1,4 +1,5 @@
-import { Flex, Input, Radio, Text } from '@chakra-ui/react'
+import { Flex, Input, Radio, RadioGroup, Text } from '@chakra-ui/react'
+import Switch from "../switch/Switch"
 import React from 'react'
 export default function EssayData(props) {
   if (!props.isAdmin) {
@@ -49,17 +50,17 @@ export default function EssayData(props) {
   } else {
     return (
       <Flex
-      minW={"592px"}
-      mb={"24px"}
-      flexDir={"column"}
-      alignItems={"flex-start"}
-      padding={"32px"}
-      gap={"16px"}
-      backgroundColor={"neutralLight.0"}
-      border={"1px"}
-      borderRadius={"16px"}
-      borderColor={"neutralLight.2"}
-      boxShadow={"0px 4px 6px 0px rgba(28, 31, 36, 0.26)"}
+        minW={"592px"}
+        mb={"24px"}
+        flexDir={"column"}
+        alignItems={"flex-start"}
+        padding={"32px"}
+        gap={"16px"}
+        backgroundColor={"neutralLight.0"}
+        border={"1px"}
+        borderRadius={"16px"}
+        borderColor={"neutralLight.2"}
+        boxShadow={"0px 4px 6px 0px rgba(28, 31, 36, 0.26)"}
       >
         <Flex
           align={"flex-start"}
@@ -76,11 +77,9 @@ export default function EssayData(props) {
           padding={"0"}
           gap={"24px"}
         >
-          <Text color={"neutralDark.0"} height={"auto"} >Anulada?</Text>
-          <Radio padding={"10px 0px"}>Sim</Radio>
-          <Radio padding={"10px 0px"}>Não</Radio>
+          <Text color={"neutralDark.0"} height={"auto"} gap="" >Anulada?</Text>
+          <Switch />
         </Flex>
-
       </Flex>
     )
   }
