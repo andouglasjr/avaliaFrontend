@@ -3,7 +3,7 @@
   import CustomButton from "../button/Button";
   import { XIcon } from "../icons/Icons";
 
-  function ModalComponent({ textPrimary, textButtonFunction, textSecondary, textOpenButton, handleSaveClick, isDisabled }) {
+  function ModalComponent({ textPrimary, textButtonFunction, textSecondary, textOpenButton, handleSaveClick, isDisabled, display }) {
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => {
       setIsOpen(true);
@@ -20,9 +20,9 @@
   
     return (
       <div>
-        <CustomButton w="96px" variant="primary" isDisabled={isDisabled} onClick={openModal} label={ textOpenButton || "Abrir Modal" } />
+        <CustomButton display={display} w="96px" variant="primary" isDisabled={isDisabled} onClick={openModal} label={ textOpenButton || "Abrir Modal" } />
   
-        <Modal isOpen={isOpen} onClose={closeModal} motionPreset="scale">
+        <Modal display={display} isOpen={isOpen} onClose={closeModal} motionPreset="scale">
           <ModalOverlay />
           <ModalContent top="calc(50% - 232px)" borderRadius="16px" maxW="464px" maxH="180px">
             <ModalBody mt="16px">

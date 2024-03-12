@@ -94,7 +94,7 @@ function EvaluationScreen(props) {
                   <EssayData isAdmin
                     tema={data.subject.name}
                   />
-                  <Essay essayData={data.text} />
+                  <Essay isEditingValue={false} essayData={data.text} />
                 </Flex>
                 <div className="row">
                   <StickyBox offsetTop={20} offsetBottom={20}>

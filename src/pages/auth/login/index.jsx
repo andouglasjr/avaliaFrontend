@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 
 import { useAuth } from "./authToken";
 
+import { useMediaQuery } from '@chakra-ui/react';
+
 // Chakra imports
 import {
   Flex,
@@ -61,6 +63,8 @@ function Login() {
   const authLogin = import.meta.env.VITE_AUTH_LOGIN;
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isMobile] = useMediaQuery("(max-width: 900px)");
 
   // Chakra color mode
   const purple3 = useColorModeValue("purple.3", "purple.3")
@@ -198,130 +202,147 @@ function Login() {
       }
     }
 
-    if(isLoading == false || isLoading === "false") {
+    if (isLoading == false || isLoading === "false") {
       isInvalidValue();
     }
   }, [click.email, click.password, formData, pathLogin, isLoading, errorMsg])
 
   return (
-    <Flex>
-      <Flex
-        backgroundImage={LoginImage}
-        backgroundSize={"cover"}
-        h="100vh"
-        w="60vw"
-        alignItems="center"
-        flexDirection="column"
-        justifyContent="center"
-        letterSpacing="1px"
-      >
-      </Flex>
-      <Flex
-        h="100vh"
-        w="40vw"
-        alignItems="center"
-        flexDirection="column"
-        justifyContent="center"
-      >
-        <Text
-          mb="40px"
-          fontSize="32px"
-          fontWeight="600"
-          fontFamily="manrope"
-          color={neutralDark4}
-        >
-          Acessar a plataforma
-        </Text>
-        <FormControl
-          fontFamily="Inter"
-          maxW="320px"
-        >
-          <Flex mb={isInvalidEmail ? "24px" : "48px"} textAlign="left" flexDirection="column">
-            <FormLabel
-              textStyle="Caption"
-              color={isInvalidEmail ? "rred.2" : neutralDark0}
-              display="flex"
-              mb="8px"
-            >
-              E-mail
-            </FormLabel>
-            <Input
-              id="email"
-              isRequired={true}
-              isInvalid={isInvalidEmail}
-              type="email"
-              placeholder="Digite seu e-mail"
-              _placeholder={{ textColor: "neutralLight.4", textStyle: "Body" }}
-              textStyle="Body"
-              mb="8px"
-              minW="360px"
-              maxW="360px"
-              minH="52px"
-              maxH="52px"
-              onBlur={emailClicked}
-              onChange={(e) => {
-                setFormData({ ...formData, email: e.target.value });
-              }}
-            />
-            <Text
-              textStyle="Caption"
-              textColor="rred.2"
-              display={((isInvalidEmail && click.email) || (isInvalidEmail && login)) ? "block" : "none"}
-            >
-              {errorMsgEmail}
-            </Text>
+    <div>
+      {isMobile ? (
+        <Flex w="100%" h="100vh" bg="purple.3">
+          <Flex w="80%" h="90vh" my="auto" borderRadius="8px" mx="auto" bg="neutralLight.0">
+            <Flex flexDirection="column" my="auto" mx="auto" maxW="90%">
+              <Text mb="30px" textStyle="h4" textColor="neutralDark.4" textAlign="center">
+                No momento, esta aplicação é apênas desenvolvida para Computador ou Notebook. Ainda estamos desenvolvendo uma versão para dispositivos móveis...
+              </Text>
+              <Text textStyle="h4" textColor="neutralDark.4" textAlign="center">
+                Por favor, volte mais tarde
+              </Text>
+            </Flex>
           </Flex>
-          <Flex mb={isInvalidPassword ? "40px" : "64px"} textAlign="left" flexDirection="column">
-            <FormLabel
-              textStyle="Caption"
-              color={isInvalidPassword ? "rred.2" : neutralDark0}
-              display="flex"
-              mb="8px"
+        </Flex>
+      ) : (
+        <Flex>
+          <Flex
+            backgroundImage={LoginImage}
+            backgroundSize={"cover"}
+            h="100vh"
+            w="60vw"
+            alignItems="center"
+            flexDirection="column"
+            justifyContent="center"
+            letterSpacing="1px"
+          >
+          </Flex>
+          <Flex
+            h="100vh"
+            w="40vw"
+            alignItems="center"
+            flexDirection="column"
+            justifyContent="center"
+          >
+            <Text
+              mb="40px"
+              fontSize="32px"
+              fontWeight="600"
+              fontFamily="manrope"
+              color={neutralDark4}
             >
-              Senha
-            </FormLabel>
-            <InputGroup alignItems="center">
-              <Input
-                id="password"
-                isRequired={true}
-                isInvalid={isInvalidPassword}
-                placeholder="Digite sua senha"
-                _placeholder={{ color: "neutralLight.4", textStyle: "Body" }}
-                textStyle="Body"
-                mb="8px"
-                minW="360px"
-                maxW="360px"
-                minH="52px"
-                maxH="52px"
-                minLength={"8"}
-                type={show ? "text" : "password"}
-                onBlur={passwordClicked}
-                onChange={(e) => {
-                  setFormData({ ...formData, password: e.target.value });
-                }}
-              />
-              <InputRightElement display="flex" alignItems="center" mt="6px">
-                <Icon
-                  ml="70px"
-                  color={neutralDark0}
-                  _hover={{ cursor: "pointer" }}
-                  as={show ? OpenEyeIcon : ClosedEyeIcon}
-                  onClick={handleClick}
+              Acessar a plataforma
+            </Text>
+            <FormControl
+              fontFamily="Inter"
+              maxW="320px"
+            >
+              <Flex mb={isInvalidEmail ? "24px" : "48px"} textAlign="left" flexDirection="column">
+                <FormLabel
+                  textStyle="Caption"
+                  color={isInvalidEmail ? "rred.2" : neutralDark0}
+                  display="flex"
+                  mb="8px"
+                >
+                  E-mail
+                </FormLabel>
+                <Input
+                  id="email"
+                  isRequired={true}
+                  isInvalid={isInvalidEmail}
+                  type="email"
+                  placeholder="Digite seu e-mail"
+                  _placeholder={{ textColor: "neutralLight.4", textStyle: "Body" }}
+                  textStyle="Body"
+                  mb="8px"
+                  minW="360px"
+                  maxW="360px"
+                  minH="52px"
+                  maxH="52px"
+                  onBlur={emailClicked}
+                  onChange={(e) => {
+                    setFormData({ ...formData, email: e.target.value });
+                  }}
                 />
-              </InputRightElement>
-            </InputGroup>
-            <Text
-              textStyle="Caption"
-              textColor={isInvalidPassword ? "rred.2" : neutralDark0}
-              display={((isInvalidPassword && click.password) || (isInvalidPassword && login)) ? "block" : "none"}
-            >
-              {errorMsgPassword}
-            </Text>
+                <Text
+                  textStyle="Caption"
+                  textColor="rred.2"
+                  display={((isInvalidEmail && click.email) || (isInvalidEmail && login)) ? "block" : "none"}
+                >
+                  {errorMsgEmail}
+                </Text>
+              </Flex>
+              <Flex mb={isInvalidPassword ? "40px" : "64px"} textAlign="left" flexDirection="column">
+                <FormLabel
+                  textStyle="Caption"
+                  color={isInvalidPassword ? "rred.2" : neutralDark0}
+                  display="flex"
+                  mb="8px"
+                >
+                  Senha
+                </FormLabel>
+                <InputGroup alignItems="center">
+                  <Input
+                    id="password"
+                    isRequired={true}
+                    isInvalid={isInvalidPassword}
+                    placeholder="Digite sua senha"
+                    _placeholder={{ color: "neutralLight.4", textStyle: "Body" }}
+                    textStyle="Body"
+                    mb="8px"
+                    minW="360px"
+                    maxW="360px"
+                    minH="52px"
+                    maxH="52px"
+                    minLength={"8"}
+                    type={show ? "text" : "password"}
+                    onBlur={passwordClicked}
+                    onChange={(e) => {
+                      setFormData({ ...formData, password: e.target.value });
+                    }}
+                  />
+                  <InputRightElement display="flex" alignItems="center" mt="6px">
+                    <Icon
+                      ml="70px"
+                      color={neutralDark0}
+                      _hover={{ cursor: "pointer" }}
+                      as={show ? OpenEyeIcon : ClosedEyeIcon}
+                      onClick={handleClick}
+                    />
+                  </InputRightElement>
+                </InputGroup>
+                <Text
+                  textStyle="Caption"
+                  textColor={isInvalidPassword ? "rred.2" : neutralDark0}
+                  display={((isInvalidPassword && click.password) || (isInvalidPassword && login)) ? "block" : "none"}
+                >
+                  {errorMsgPassword}
+                </Text>
+              </Flex>
+              <Loading isLoading={isLoading} formData={formData} setLoginValue={setLoginValue} setLogin={setLogin} loginValue={loginValue} />
+            </FormControl>
           </Flex>
-          <Loading isLoading={isLoading} formData={formData} setLoginValue={setLoginValue} setLogin={setLogin} loginValue={loginValue} />
-        </FormControl>
-      </Flex>
-    </Flex>
+        </Flex>
+      )}
+    </div>
   );
 }
 
