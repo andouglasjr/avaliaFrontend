@@ -32,7 +32,7 @@ export default function Essay(props) {
       console.log("Sua Redação está em Branco, escreva algo antes de enviar!")
     } else {
       setIsEditing(false);
-      props.setFormData({text: textareaValue, subject_id: props.subject_id});
+      props.setFormData({ text: textareaValue, subject_id: props.subject_id });
       setOriginalTextareaValue(textareaValue);
       props.setPermission(true)
       setIsDisabled(true)
@@ -41,7 +41,7 @@ export default function Essay(props) {
 
   const handleTextareaChange = (event) => {
     setTextareaValue(event.target.value);
-    if(textareaValue.length < 300){
+    if (textareaValue.length < 300) {
       setIsDisabled(false)
     }
   };
@@ -82,6 +82,7 @@ export default function Essay(props) {
             backgroundRepeat="no-repeat"
             backgroundSize='cover'
             borderRadius="16px"
+            mb={isEditing ? '0px' : '32px'}
             rows="30"
             readOnly={!isEditing || props.isAdmin}
             overflow="hidden"
@@ -96,7 +97,7 @@ export default function Essay(props) {
           />
         </Flex>
       </div>
-      <Flex display="flex" justifyContent="space-between" align="center" w="100%" padding="16.5px 24px">
+      <Flex display={isEditing ? "flex" : "none"} justifyContent="space-between" align="center" w="100%" padding="16.5px 24px">
         <Flex align="center">
           <div>
             <Flex display={props.permission ? "block" : "none"}>
@@ -105,10 +106,10 @@ export default function Essay(props) {
                 <Text textAlign="center" textStyle="Caption" ml="6px" textColor="#637792">Racunho Salvo</Text>
               </Flex>
             </Flex>
-          </div>
+          </div>  
         </Flex>
         <Modal isDisabled={isDisabled} handleSaveClick={handleSaveClick} textPrimary="Quer enviar a redação?" textOpenButton="Enviar" textButtonFunction="Enviar" />
       </Flex>
-    </Flex >
+    </Flex>
   );
 }

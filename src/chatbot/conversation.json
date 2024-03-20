@@ -275,9 +275,7 @@
                 "next": [
                     "Pronto! O tema escolhido foi \"{tema}\". Agora, vou gerar a redação e corrigi-la. Aguarde enquanto preparo tudo para você."
                 ],
-                "flow": [
-                    "Tudo pronto! Você será redirecionado ao nosso espaço de redação para conferir o texto gerado."
-                ]
+                "flow": []
             },
             "response_type": "end",
             "options": [

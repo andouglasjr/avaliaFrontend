@@ -474,9 +474,11 @@ const Select = function selectFunction(props) {
         <div>
             {options.map((o, index) => {
                 const handleClicked = () => {
+                    console.log("AQui");
                     setID(trigger[0]);
                     setInputValue(o);
                     setPermission(true);
+                    console.log("AQui");
                 }
 
                 const boxStyles = {
@@ -619,9 +621,6 @@ const Flow = function flowFunction(props) {
             <Text display={(flowPermissionSelect ? "block" : "none")} textAlign="justify" textStyle="Body">
                 {(flow == null || flow == "") ? null : flow}
             </Text>
-            <Text display={(flowPermissionEnd ? "block" : "none")} textAlign="justify" textStyle="Body">
-                {(flowEnd == null || flowEnd == "") ? null : flowEnd}
-            </Text>
         </div>
     );
 }
@@ -682,7 +681,6 @@ function interactComponent() {
     const [inputLocalValue, setInputLocalValue] = useState("");
     const [flowPermissionSelect, setFlowPermissionSelect] = useState(false);
     const [flowPermissionEnd, setFlowPermissionEnd] = useState(false);
-    const [flowEnd, setFlowEnd] = useState("");
     const [writer, setWriter] = useState(false);
     const [c, setC] = useState(false);
 
@@ -705,10 +703,6 @@ function interactComponent() {
             {allChat.map((ac, index) => {
                 const first = ac.message.first;
                 const flow = ac.message.flow;
-                if(ac.response_type === "end") {
-                    setFlowEnd(ac.message.flow);
-                    console.log(flowEnd)
-                }
                 return (
                     <Flex key={index} maxW="680px" minW="680px" flexDirection="column">
                         <Flex key={index + "1"} minW="680px" mt="40px">
@@ -735,7 +729,7 @@ function interactComponent() {
                             })}
                             {flow.map((flow, flowIndex) => {
                                 return (
-                                    <Flow flowEnd={flowEnd} flowPermissionSelect={flowPermissionSelect} flowPermissionEnd={flowPermissionEnd} flow={flow} key={index + "-" + flowIndex} />
+                                    <Flow flowPermissionSelect={flowPermissionSelect} flowPermissionEnd={flowPermissionEnd} flow={flow} key={index + "-" + flowIndex} />
                                 )
                             })}
                             <Options

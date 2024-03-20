@@ -5,6 +5,7 @@ export default function EssayData(props) {
   if (!props.isAdmin) {
     return (
       <Flex
+        maxW={"592px"}
         minW={"592px"}
         mb={"24px"}
         flexDir={"column"}
